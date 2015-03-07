@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from unittest import TestCase
-from pynes.analyzer import code_line_generator
+from lexical import code_line_generator
 from types import GeneratorType
 from tempfile import NamedTemporaryFile
 

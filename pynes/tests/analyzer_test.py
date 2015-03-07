@@ -2,7 +2,7 @@
 
 from unittest import TestCase
 from types import GeneratorType
-from pynes.analyzer import analyse, UnknownToken
+from lexical import analyse, UnknownToken
 
 asm_test_tokens = [
     dict(type='T_FAKE_INSTRUCTION', regex='^(ONE|TEST)', store=True),

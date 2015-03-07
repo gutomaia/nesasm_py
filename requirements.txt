@@ -1,1 +1,1 @@
-Pillow==2.5.3
+lexical==0.0.1

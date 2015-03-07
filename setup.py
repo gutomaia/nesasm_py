@@ -21,14 +21,14 @@ class TestCommand(Command):
 
 
 setup(
-    name='pyNES',
-    version='0.0.2',
-    description='Python Programming for Nintendo 8bits',
+    name='nesasm',
+    version='0.0.1',
+    description='NES Assembly Compiler',
     author="Gustavo Maia Neto (Guto Maia)",
     author_email="guto@guto.net",
     license="GPL3",
     packages=find_packages(exclude=["*.tests", "*.tests.*", "examples"]),
-    scripts=['bin/pynes'],
+    scripts=['bin/nesasm'],
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Environment :: Console',
@@ -39,7 +39,7 @@ setup(
         'Topic :: Software Development :: Compilers',
         'Topic :: Software Development :: Embedded Systems',
     ],
-    url='http://github.com/gutomaia/pyNES/',
+    url='http://github.com/gutomaia/nesasm_py/',
     cmdclass={'test': TestCommand},
     test_suite="pynes.tests",
 )

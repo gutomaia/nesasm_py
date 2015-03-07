@@ -2,7 +2,7 @@
 from re import match
 
 import pynes
-from pynes.analyzer import analyse
+from lexical import analyse
 from pynes.c6502 import opcodes, address_mode_def
 
 import io
