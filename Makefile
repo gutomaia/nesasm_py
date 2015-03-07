@@ -17,7 +17,7 @@ MAKENSIS_EXE = ${NSIS_PATH}/makensis.exe
 
 DOWNLOAD_PATH=deps
 
-PYTHON_MODULES=pynes
+PYTHON_MODULES=nesasm
 
 PYTHON_EXE=${WINE_PATH}/Python27/python.exe
 EASYINSTALL_EXE=${WINE_PATH}/Python27/Scripts/easy_install.exe
