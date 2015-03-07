@@ -1,9 +1,4 @@
 language: python
-before_install:
-  - sudo apt-get install libjpeg8 libjpeg8-dev libfreetype6 libfreetype6-dev zlib1g-dev tree
-  - sudo ln -s /usr/lib/`uname -i`-linux-gnu/libjpeg.so.8 ~/virtualenv/python2.7/lib/
-  - sudo ln -s /usr/lib/`uname -i`-linux-gnu/libfreetype.so ~/virtualenv/python2.7/lib/
-  - sudo ln -s /usr/lib/`uname -i`-linux-gnu/libz.so ~/virtualenv/python2.7/lib/
 python:
   - "2.7"
 install:
@@ -11,6 +6,6 @@ install:
   - pip install -q -r requirements_test.txt
 script:
   - nosetests
-  - coverage run --source=pynes setup.py test
+  - coverage run --source=nesasm setup.py test
 after_success:
   - coveralls
