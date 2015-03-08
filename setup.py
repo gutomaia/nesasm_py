@@ -1,7 +1,13 @@
 # -*- coding: utf-8 -*-
+import os
 from setuptools import setup, find_packages
 from distutils.core import Command
 from unittest import TextTestRunner, TestLoader
+
+here = os.path.abspath(os.path.dirname(__file__))
+
+with open(os.path.join(here, 'requirements.txt')) as f:
+    REQUIREMENTS = f.read()
 
 
 class TestCommand(Command):
@@ -42,4 +48,5 @@ setup(
     url='http://github.com/gutomaia/nesasm_py/',
     cmdclass={'test': TestCommand},
     test_suite='nesasm.tests',
+    install_requires=REQUIREMENTS,
 )
