@@ -8,15 +8,23 @@ OK=\033[32m[OK]\033[39m
 FAIL=\033[31m[FAIL]\033[39m
 CHECK=@if [ $$? -eq 0 ]; then echo "${OK}"; else echo "${FAIL}" ; fi
 
-default: python.mk
+default: python.mk github.mk
 	@$(MAKE) -C . test
 
 ifeq "true" "${shell test -f python.mk && echo true}"
 include python.mk
 endif
 
+ifeq "true" "${shell test -f github.mk && echo true}"
+include github.mk
+endif
+
 python.mk:
 	@${WGET} https://raw.githubusercontent.com/gutomaia/makery/master/python.mk && \
+		touch $@
+
+github.mk:
+	@${WGET} https://raw.githubusercontent.com/gutomaia/makery/master/github.mk && \
 		touch $@
 
 clean: python_clean
