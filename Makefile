@@ -31,6 +31,7 @@ clean: python_clean
 
 purge: python_purge
 	@rm python.mk
+	@rm github.mk
 
 build: python_build
 
