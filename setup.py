@@ -10,7 +10,7 @@ with open(os.path.join(here, 'VERSION.txt')) as f:
     VERSION = f.read().strip()
 
 with open(os.path.join(here, 'requirements.txt')) as f:
-    REQUIREMENTS = f.read()
+    REQUIREMENTS = [line for line in iter(f)]
 
 
 class TestCommand(Command):
