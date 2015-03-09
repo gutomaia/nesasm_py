@@ -7,7 +7,7 @@ from unittest import TextTestRunner, TestLoader
 here = os.path.abspath(os.path.dirname(__file__))
 
 with open(os.path.join(here, 'VERSION.txt')) as f:
-    VERSION = f.read()
+    VERSION = f.read().strip()
 
 with open(os.path.join(here, 'requirements.txt')) as f:
     REQUIREMENTS = f.read()
