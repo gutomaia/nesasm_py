@@ -66,6 +66,6 @@ register:
 	${VIRTUALENV} python setup.py register -r pypi
 
 distribute: dist
-	${VIRTUALENV} python setup.py sdist bdist_wheel upload -r pypi
+	${VIRTUALENV} python setup.py bdist_egg bdist_wheel upload -r pypi
 
 .PHONY: clean linux windows dist nsis installer run report ghpages
