@@ -1,5 +1,8 @@
 PLATFORM = $(shell uname)
 
+PROJECT_NAME=NESasm
+PROJECT_TAG?=nesasm
+
 PYTHON_MODULES=nesasm
 
 WGET = wget -q 
