@@ -40,7 +40,7 @@ def d_dw(arg, cart):
 
 
 def d_incbin(arg, cart):
-    f = open(cart.path + arg, 'rw')
+    f = open(cart.path + arg, 'rb')
     content = f.read()
     for c in content:
         cart.append_code([ord(c)])
