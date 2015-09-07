@@ -1,1 +1,1 @@
-lexical==0.0.2
+lexical==0.0.3
