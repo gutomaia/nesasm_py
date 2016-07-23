@@ -43,8 +43,12 @@ def d_incbin(arg, cart):
     f = open(cart.path + arg, 'rb')
     content = f.read()
     for c in content:
-        cart.append_code([ord(c)])
-
+        if isinstance(c, str):
+            # python 2
+            cart.append_code([ord(c)])
+        else:
+            # python 3
+            cart.append_code([c])
 
 def d_rsset(arg, cart):
     pass

@@ -87,7 +87,7 @@ class MovingSpriteTest(HexTestCase):
         opcodes = semantic(self.ast, True, cart=cart)
 
         self.assertIsNotNone(opcodes)
-        bin = ''.join([chr(opcode) for opcode in opcodes])
+        bin = bytearray(opcodes)
         f = open('fixtures/movingsprite/movingsprite.nes', 'rb')
         content = f.read()
         f.close()

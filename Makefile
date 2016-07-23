@@ -58,7 +58,10 @@ report:
 	coverage run --source=pynes setup.py test
 
 tdd:
-	${VIRTUALENV} tdaemon --ignore-dirs="build,dist,bin,site,pynes.egg-info,venv" --custom-args="-e image_test.py --with-notify --no-start-message"
+	${VIRTUALENV} tdaemon --ignore-dirs="build,dist,bin,site,pynes.egg-info,venv,.tox" --custom-args="-e image_test.py --with-notify --no-start-message"
+
+tox: ${REQUIREMENTS_TEST}
+	${VIRTUALENV} tox
 
 dist: python_egg python_wheel
 

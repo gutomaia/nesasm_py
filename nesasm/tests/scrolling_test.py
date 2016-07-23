@@ -28,7 +28,8 @@ class ScrollingTest(HexTestCase):
         opcodes = semantic(ast, True, cart=cart)
 
         self.assertIsNotNone(opcodes)
-        bin = ''.join([chr(opcode) for opcode in opcodes])
+        bin = bytearray(opcodes)
+
         f = open(path + bin_file, 'rb')
         content = f.read()
         f.close()

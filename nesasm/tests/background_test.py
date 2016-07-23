@@ -23,10 +23,11 @@ class BackgroundTest(HexTestCase):
         opcodes = semantic(ast, True, cart=cart)
 
         self.assertIsNotNone(opcodes)
-        bin = ''.join([chr(opcode) for opcode in opcodes])
-        f = open(path + bin_file, 'rb')
-        content = f.read()
-        f.close()
+        bin = bytearray(opcodes)
+
+        with open(path + bin_file, 'rb') as f:
+            content = f.read()
+
         self.assertHexEquals(content, bin)
 
     def test_asm_compiler_background(self):
