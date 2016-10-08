@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
+from __future__ import absolute_import
 
 import os
 import sys
 import re
 import logging
 import argparse
-import nesasm
+from nesasm.compiler import compile_file
 
 def main(argv=None):
     parser = argparse.ArgumentParser(
@@ -31,5 +32,4 @@ def main(argv=None):
     args.func(args)
 
 def exec_asm(args):
-    nesasm.compiler.compile_file(args.input, output=args.output,
-                                path=args.path)
+    compile_file(args.input, output=args.output, path=args.path)
