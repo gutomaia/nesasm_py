@@ -49,8 +49,6 @@ class MetaInstructionCase(type):
 
 class FileTestCase(TestCase):
 
-    def __init__(self, testname):
-        TestCase.__init__(self, testname)
 
     def assertFileExists(self, filename):
         try:
@@ -67,8 +65,6 @@ class FileTestCase(TestCase):
 
 class HexTestCase(TestCase):
 
-    def __init__(self, testname):
-        TestCase.__init__(self, testname)
 
     def assertHexEquals(self, expected, actual):
         OKGREEN = '\033[92m'
