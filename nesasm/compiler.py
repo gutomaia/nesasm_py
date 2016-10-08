@@ -416,13 +416,13 @@ def semantic(ast, iNES=False, cart=None):
 
 
 def compile_file(asmfile, output=None, path=None):
-    from os.path import dirname, realpath
+    from os.path import dirname, splitext, realpath
 
     if path is None:
         path = dirname(realpath(asmfile)) + '/'
 
     if output is None:
-        output = 'output.nes'
+        output = splitext(asmfile)[0] + '.nes'
 
     with io.open(asmfile, "r", encoding="utf-8") as f:
         opcodes = compile(f, path)
