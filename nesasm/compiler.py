@@ -427,8 +427,13 @@ def compile_file(asmfile, output=None, path=None):
     with io.open(asmfile, "r", encoding="utf-8") as f:
         opcodes = compile(f, path)
 
-    pynes.write_bin_code(opcodes, output)
+    write_bin_code(opcodes, output)
 
+def write_bin_code(code, file):
+    target = open(file, 'wb')
+    for opcode in code:
+        target.write(chr(opcode))
+    target.close()
 
 def compile(code, path):
 
