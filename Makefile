@@ -5,7 +5,11 @@ PROJECT_TAG?=nesasm
 
 PYTHON_MODULES=nesasm
 
-WGET = wget -q 
+NESASM_C_PATH=tools/nesasm
+NESASM_C_MAKE=${NESASM_C_PATH}/Makefile
+NESASM_C_BIN=${NESASM_C_PATH}/bin/nesasm
+
+WGET = wget -q
 
 OK=\033[32m[OK]\033[39m
 FAIL=\033[31m[FAIL]\033[39m
@@ -35,13 +39,26 @@ clean: python_clean
 purge: python_purge
 	@rm python.mk
 	@rm github.mk
+	@rm tools
 
 build: python_build
 
-test: python_build ${REQUIREMENTS_TEST}
+install:
+	${VIRTUALENV} python setup.py develop
+
+test: python_build ${REQUIREMENTS_TEST} install
 	${VIRTUALENV} nosetests --processes=2 -e image_test.py
 
-ci:
+${NESASM_C_MAKE}:
+	mkdir -p tools
+	cd tools && git clone https://github.com/toastynerd/nesasm.git
+
+${NESASM_C_BIN}: ${NESASM_C_MAKE}
+	@$(MAKE) -C ${NESASM_C_PATH}
+
+tools: ${NESASM_C_BIN}
+
+ci: install tools
 	${VIRTUALENV} CI=1 nosetests
 
 pep8: ${REQUIREMENTS_TEST}

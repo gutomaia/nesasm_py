@@ -108,3 +108,13 @@ class HexTestCase(TestCase):
                 out += '%s- %d \n' % (act, line + 1)
             print(out)
             raise AssertionError('Hex are not equal')
+
+
+class HexFileTestCase(HexTestCase):
+
+    def assertHexFileEquals(self, expected, actual):
+        with open(expected, 'rb') as f:
+            expectedf = f.read()
+        with open(actual, 'rb') as f:
+            actualf = f.read()
+        self.assertHexEquals(expectedf, actualf)
