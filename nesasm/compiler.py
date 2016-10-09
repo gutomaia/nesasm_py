@@ -242,7 +242,7 @@ def lexical(code):
     return analyse(code, asm65_tokens) # A generator
 
 
-def get_value(token, labels=[]):
+def get_value(token, labels=None):
     if token['type'] == 'T_ADDRESS':
         m = match(asm65_tokens[1]['regex'], token['value'])
         return int(m.group(1), 16)
