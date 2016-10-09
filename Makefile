@@ -43,7 +43,7 @@ purge: python_purge
 
 build: python_build
 
-install:
+install: setup.py
 	${VIRTUALENV} python setup.py develop
 
 test: python_build ${REQUIREMENTS_TEST} install
@@ -72,7 +72,7 @@ search:
 	find pynes -regex .*\.py$ | xargs -I [] egrep -H -n 'print|ipdb' [] || echo ''
 
 report:
-	coverage run --source=pynes setup.py test
+	${VIRTUALENV} coverage run --source=pynes setup.py test
 
 tdd:
 	${VIRTUALENV} tdaemon --ignore-dirs="build,dist,bin,site,pynes.egg-info,venv,.tox" --custom-args="-e image_test.py --with-notify --no-start-message"
