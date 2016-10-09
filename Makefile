@@ -43,9 +43,6 @@ purge: python_purge
 
 build: python_build
 
-install: setup.py
-	${VIRTUALENV} python setup.py develop
-
 test: python_build ${REQUIREMENTS_TEST} ${CHECKPOINT_DIR}/.python_develop
 	${VIRTUALENV} nosetests --processes=2
 
@@ -58,7 +55,7 @@ ${NESASM_C_BIN}: ${NESASM_C_MAKE}
 
 tools: ${NESASM_C_BIN}
 
-ci: ${CHECKPOINT_DIR}/.python_develop tools
+ci: build ${REQUIREMENTS_TEST} ${CHECKPOINT_DIR}/.python_develop tools
 	${VIRTUALENV} CI=1 nosetests
 
 pep8: ${REQUIREMENTS_TEST}
