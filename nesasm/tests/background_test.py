@@ -34,6 +34,5 @@ class BackgroundTest(HexTestCase):
     def test_asm_compiler_background(self):
         self.assertAsmResults('background.asm', 'background.nes')
 
-    @skip('TODO:')
     def test_asm_compiler_background3(self):
         self.assertAsmResults('background3.asm', 'background3.nes')

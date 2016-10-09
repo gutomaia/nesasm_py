@@ -86,11 +86,9 @@ class NESAsmCiTest(HexFileTestCase):
     def test_movingsprite(self):
         self.binary_compare('movingsprite/movingsprite.asm')
 
-    @skip('TODO: not matching')
     def test_background(self):
         self.binary_compare('nerdynights/background/background.asm')
 
-    @skip('TODO: not matching')
     def test_background3(self):
         self.binary_compare('nerdynights/background/background3.asm')
 

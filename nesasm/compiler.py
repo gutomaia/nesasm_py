@@ -335,7 +335,8 @@ def get_labels(ast):
         elif ('S_DIRECTIVE' == leaf['type']
                 and '.db' == leaf['children'][0]['value']):
             for i in leaf['children']:
-                if 'T_ADDRESS' == i['type']:
+                # TODO: better checking here
+                if 'T_ADDRESS' == i['type'] or 'T_BINARY_NUMBER' == i['type']:
                     address += 1
         elif ('S_DIRECTIVE' == leaf['type']
                 and '.incbin' == leaf['children'][0]['value']):
