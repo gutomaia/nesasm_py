@@ -30,6 +30,8 @@ def d_db(arg, cart):
     for token in arg:
         if token['type'] == 'T_ADDRESS':
             l.append(int(token['value'][1:], 16))
+        elif token['type'] == 'T_BINARY_NUMBER':
+            l.append(int(token['value'][1:], 2))
     cart.append_code(l)
 
 
