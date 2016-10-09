@@ -46,8 +46,8 @@ build: python_build
 install: setup.py
 	${VIRTUALENV} python setup.py develop
 
-test: python_build ${REQUIREMENTS_TEST} install
-	${VIRTUALENV} nosetests --processes=2 -e image_test.py
+test: python_build ${REQUIREMENTS_TEST} ${CHECKPOINT_DIR}/.python_develop
+	${VIRTUALENV} nosetests --processes=2
 
 ${NESASM_C_MAKE}:
 	mkdir -p tools
@@ -58,7 +58,7 @@ ${NESASM_C_BIN}: ${NESASM_C_MAKE}
 
 tools: ${NESASM_C_BIN}
 
-ci: install tools
+ci: ${CHECKPOINT_DIR}/.python_develop tools
 	${VIRTUALENV} CI=1 nosetests
 
 pep8: ${REQUIREMENTS_TEST}
@@ -88,4 +88,4 @@ register:
 distribute: dist
 	${VIRTUALENV} python setup.py bdist_egg bdist_wheel upload -r pypi
 
-.PHONY: clean linux windows dist nsis installer run report ghpages
+.PHONY: install clean report dist register distribute ghpages
