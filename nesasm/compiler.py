@@ -432,7 +432,8 @@ def compile_file(asmfile, output=None, path=None):
 def write_bin_code(code, file):
     target = open(file, 'wb')
     for opcode in code:
-        target.write(chr(opcode))
+        target.write((bytearray((opcode,))))
+
     target.close()
 
 def compile(code, path):
