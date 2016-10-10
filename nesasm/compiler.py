@@ -1,13 +1,10 @@
 # -*- coding: utf-8 -*-
 from re import match
 
-import nesasm
 from lexical import analyse
 from nesasm.c6502 import opcodes, address_mode_def
 
 import io
-import inspect
-from binascii import hexlify
 
 from nesasm.directives import directive_list
 from nesasm.cartridge import Cartridge
