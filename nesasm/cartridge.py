@@ -16,10 +16,10 @@ class Cartridge(object):
         return [0x4e, 0x45, 0x53, 0x1a]
 
     def nes_get_header(self):
-        id = self.nes_id()
+        _id = self.nes_id()
         unused = [0, 0, 0, 0, 0, 0, 0, 0]
         header = []
-        header.extend(id)
+        header.extend(_id)
         header.append(self.inespgr)
         header.append(self.ineschr)
         header.append(self.inesmir)
@@ -39,10 +39,10 @@ class Cartridge(object):
     def set_iNES_mir(self, inesmir):
         self.inesmir = inesmir
 
-    def set_bank_id(self, id):
-        if id not in self.banks:
-            self.banks[id] = dict(code=[], start=None, size=(1024 * 8))
-        self.bank_id = id
+    def set_bank_id(self, _id):
+        if _id not in self.banks:
+            self.banks[_id] = dict(code=[], start=None, size=(1024 * 8))
+        self.bank_id = _id
 
     def set_org(self, org):
         if self.bank_id not in self.banks:
@@ -71,11 +71,11 @@ class Cartridge(object):
     def get_ines_code(self):
         if self.bank_id not in self.banks:
             self.set_bank_id(self.bank_id)
-        bin = []
+        opcodes = []
         nes_header = self.nes_get_header()
-        bin.extend(nes_header)
+        opcodes.extend(nes_header)
         for i in self.banks:
             for j in range(len(self.banks[i]['code']), self.banks[i]['size']):
                 self.banks[i]['code'].append(0xff)
-            bin.extend(self.banks[i]['code'])
-        return bin
+            opcodes.extend(self.banks[i]['code'])
+        return opcodes

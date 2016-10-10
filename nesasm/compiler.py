@@ -40,11 +40,11 @@ asm65_tokens = [
 ]
 
 
-def look_ahead(tokens, index, type, value=None):
+def look_ahead(tokens, index, _type, value=None):
     if index > len(tokens) - 1:
         return 0
     token = tokens[index]
-    if token['type'] == type:
+    if token['type'] == _type:
         if value is None or token['value'].upper() == value.upper():
             return 1
     return 0
