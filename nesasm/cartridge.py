@@ -1,4 +1,4 @@
-class Cartridge:
+class Cartridge(object):
 
     def __init__(self):
         self.banks = {}
