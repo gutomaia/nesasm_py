@@ -12,10 +12,10 @@ from nesasm.compiler import lexical, syntax, semantic
 
 class OraTest(unittest.TestCase):
 
-    '''Test logical OR operation between $10 (Decimal 16) and the
-    content of the Accumulator'''
 
     def test_ora_imm(self):
+        '''Test logical OR operation between $10 (Decimal 16) and the
+        content of the Accumulator'''
         tokens = list(lexical('ORA #$10'))
         self.assertEquals(2, len(tokens))
         self.assertEquals('T_INSTRUCTION', tokens[0]['type'])
@@ -26,10 +26,10 @@ class OraTest(unittest.TestCase):
         code = semantic(ast)
         self.assertEquals(code, [0x09, 0x10])
 
-    '''Test logical OR operation between #10 (Decimal 10) and the
-    content of the Accumulator'''
 
     def test_ora_imm_with_decimal(self):
+        '''Test logical OR operation between #10 (Decimal 10) and the
+        content of the Accumulator'''
         tokens = list(lexical('ORA #10'))
         self.assertEquals(2, len(tokens))
         self.assertEquals('T_INSTRUCTION', tokens[0]['type'])
@@ -40,10 +40,10 @@ class OraTest(unittest.TestCase):
         code = semantic(ast)
         self.assertEquals(code, [0x09, 0x0a])
 
-    '''Test logical OR operation between binary #%00000100
-    (Decimal 4) and the content of the Accumulator'''
 
     def test_ora_imm_with_binary(self):
+        '''Test logical OR operation between binary #%00000100
+        (Decimal 4) and the content of the Accumulator'''
         tokens = list(lexical('ORA #%00000100'))
         self.assertEquals(2, len(tokens))
         self.assertEquals('T_INSTRUCTION', tokens[0]['type'])
@@ -54,10 +54,10 @@ class OraTest(unittest.TestCase):
         code = semantic(ast)
         self.assertEquals(code, [0x09, 0x04])
 
-    '''Test logical OR operation between the content of the
-    Accumulator and the content of zero page $00'''
 
     def test_ora_zp(self):
+        '''Test logical OR operation between the content of the
+        Accumulator and the content of zero page $00'''
         tokens = list(lexical('ORA $00'))
         self.assertEquals(2, len(tokens))
         self.assertEquals('T_INSTRUCTION', tokens[0]['type'])
