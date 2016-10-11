@@ -26,15 +26,15 @@ class AnalyzerTest(TestCase):
         tokens = analyse(';test\n  @--Case \n;TUTEM acronym test',
                          asm_test_tokens)
         self.assertIsInstance(tokens, GeneratorType)
-        try:
+
+        with self.assertRaises(UnknownToken) as r:
             list(tokens)
-        except UnknownToken as ut:
-            self.assertEquals(2, ut.line)
-            self.assertEquals(3, ut.column)
-            self.assertEquals('  @--Case \n', ut.line_code) # W/ trail wspaces
-            self.assertEquals('Unknown token @(2,3):   @--Case', ut.message)
-        else:
-            self.fail("UnkownToken not raised")
+
+        ut = r.exception
+        self.assertEquals(2, ut.line)
+        self.assertEquals(3, ut.column)
+        self.assertEquals('  @--Case \n', ut.line_code) # W/ trail wspaces
+        self.assertEquals('Unknown token @(2,3):   @--Case', ut.message)
 
     def test_empty_token_types_list(self):
         tokens = analyse('something', [])
