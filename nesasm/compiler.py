@@ -187,16 +187,6 @@ def t_list(tokens, index):
     return 0
 
 
-def get_list_jump(tokens, index):
-    keep = True
-    a = 0
-    while keep:
-        keep = keep & (
-            t_address(tokens, index + a) | t_separator(tokens, index + a))
-        a += 1
-    return a
-
-
 def OR(args, tokens, index):
     for t in args:
         if t(tokens, index):
