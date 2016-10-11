@@ -168,3 +168,17 @@ class DirectiveTest(unittest.TestCase):
         self.assertIsNotNone(code)
         expected = [0x80, 0x0, 0x03, 0x80, 1, 2, 3, 4]
         self.assertEquals(expected, code)
+
+    def test_db_5_with_binary(self):
+        code = '.db %00000000, %00010000, %01010000, %00010000, %00000000, %00000000, %00000000, %00110000'
+        tokens = list(lexical(code))
+        self.assertEquals(16, len(tokens))
+        self.assertEquals('T_DIRECTIVE', tokens[0]['type'])
+        self.assertEquals('T_BINARY_NUMBER', tokens[1]['type'])
+        ast = syntax(tokens)
+        self.assertEquals(1, len(ast))
+        self.assertEquals('S_DIRECTIVE', ast[0]['type'])
+        code = semantic(ast)
+        self.assertIsNotNone(code)
+        expected = [0x00, 0x10, 0x50, 0x10, 0x00, 0x00, 0x00, 0x30]
+        self.assertEquals(expected, code)
