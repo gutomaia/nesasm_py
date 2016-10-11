@@ -87,11 +87,11 @@ class MovingSpriteTest(HexTestCase):
         opcodes = semantic(self.ast, True, cart=cart)
 
         self.assertIsNotNone(opcodes)
-        bin = bytearray(opcodes)
+        _bin = bytearray(opcodes)
         f = open('fixtures/movingsprite/movingsprite.nes', 'rb')
         content = f.read()
         f.close()
-        self.assertHexEquals(content, bin)
+        self.assertHexEquals(content, _bin)
 
     def test_get_labels(self):
         expected = {}

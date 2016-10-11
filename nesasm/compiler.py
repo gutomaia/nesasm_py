@@ -3,7 +3,7 @@ from re import match
 
 from lexical import analyse
 from nesasm.c6502 import opcodes, address_mode_def
-
+import os
 import io
 
 from nesasm.directives import directive_list
@@ -175,7 +175,7 @@ def t_list(tokens, index):
             and t_separator(tokens, index + 1)):
         islist = 1
         arg = 0
-        while (islist):
+        while islist:
             islist = islist and t_separator(tokens, index + (arg * 2) + 1)
             var_index = index + (arg * 2) + 2
             islist = islist and t_address_or_t_binary_number(tokens, var_index)
@@ -273,7 +273,7 @@ def syntax(tokens):
     # debug = 0
     labels = []
     move = 0
-    while (x < len(tokens)):
+    while x < len(tokens):
         if t_label(tokens, x):
             labels.append(get_value(tokens[x]))
             x += 1
@@ -312,7 +312,7 @@ def syntax(tokens):
                 print(tokens[x + 2])
                 print(tokens[x + 3])
 
-                raise(Exception('UNKNOW TOKEN'))
+                raise Exception('UNKNOW TOKEN')
     return ast
 
 

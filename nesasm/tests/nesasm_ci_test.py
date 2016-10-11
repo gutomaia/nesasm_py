@@ -3,7 +3,6 @@ from unittest import SkipTest, skip
 from os import devnull, remove, makedirs
 from os.path import abspath, basename, dirname, exists, splitext
 from glob import glob
-import sys
 
 NESASM_C_BIN = abspath('tools/nesasm/bin/nesasm')
 NESASM_PY_BIN = abspath('bin/nesasm')

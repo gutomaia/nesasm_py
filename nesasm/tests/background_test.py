@@ -24,12 +24,12 @@ class BackgroundTest(HexTestCase):
         opcodes = semantic(ast, True, cart=cart)
 
         self.assertIsNotNone(opcodes)
-        bin = bytearray(opcodes)
+        _bin = bytearray(opcodes)
 
         with open(path + bin_file, 'rb') as f:
             content = f.read()
 
-        self.assertHexEquals(content, bin)
+        self.assertHexEquals(content, _bin)
 
     def test_asm_compiler_background(self):
         self.assertAsmResults('background.asm', 'background.nes')

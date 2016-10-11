@@ -1,9 +1,4 @@
 # -*- coding: utf-8 -*-
-
-import unittest
-
-import nesasm
-
 from nesasm.tests import HexTestCase
 from nesasm.compiler import lexical, syntax, semantic
 from nesasm.cartridge import Cartridge
@@ -28,12 +23,12 @@ class ScrollingTest(HexTestCase):
         opcodes = semantic(ast, True, cart=cart)
 
         self.assertIsNotNone(opcodes)
-        bin = bytearray(opcodes)
+        _bin = bytearray(opcodes)
 
         f = open(path + bin_file, 'rb')
         content = f.read()
         f.close()
-        self.assertHexEquals(content, bin)
+        self.assertHexEquals(content, _bin)
 
     def test_asm_compiler_scrolling_1(self):
         self.assertAsmResults('scrolling1.asm', 'scrolling1.nes')

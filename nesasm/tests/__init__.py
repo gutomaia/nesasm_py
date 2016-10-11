@@ -77,7 +77,7 @@ class HexTestCase(TestCase):
             cursor = 0
             lines = []
             out = ''
-            while (cursor < len(expected) or cursor < len(actual)):
+            while cursor < len(expected) or cursor < len(actual):
                 for a in range(16):
                     if cursor < len(expected) and cursor < len(actual):
                         if expected[cursor] != actual[cursor] and line not in \
@@ -93,14 +93,14 @@ class HexTestCase(TestCase):
                 for a in range(16):
                     cursor = (line * 16) + a
                     if cursor < len(expected) and cursor < len(actual):
-                            if expected[cursor] != actual[cursor]:
-                                exp += '%s%02x%s' % (
-                                    OKGREEN, ord(expected[cursor]), ENDC)
-                                act += '%s%02x%s' % (
-                                    FAIL, ord(actual[cursor]), ENDC)
-                            else:
-                                exp += '%02x' % ord(expected[cursor])
-                                act += '%02x' % ord(actual[cursor])
+                        if expected[cursor] != actual[cursor]:
+                            exp += '%s%02x%s' % (
+                                OKGREEN, ord(expected[cursor]), ENDC)
+                            act += '%s%02x%s' % (
+                                FAIL, ord(actual[cursor]), ENDC)
+                        else:
+                            exp += '%02x' % ord(expected[cursor])
+                            act += '%02x' % ord(actual[cursor])
                     if ((a + 1) % 2) == 0:
                         exp += ' '
                         act += ' '
