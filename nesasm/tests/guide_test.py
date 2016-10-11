@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
-import unittest
-
-from nesasm.compiler import lexical, syntax
-
 '''
 Those tests are based on examples from:
 http://nesdev.parodius.com/6502guid.txt
 '''
+
+import unittest
+from nesasm.compiler import lexical, syntax
+
 
 
 class GuideTest(unittest.TestCase):
