@@ -1,6 +1,6 @@
 from nesasm.tests import HexFileTestCase
-from unittest import SkipTest, skip
-from os import devnull, remove, makedirs
+from unittest import SkipTest
+from os import remove, makedirs
 from os.path import abspath, basename, dirname, exists, splitext
 from glob import glob
 
