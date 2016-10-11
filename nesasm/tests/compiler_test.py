@@ -77,8 +77,8 @@ class CompilerTest(unittest.TestCase):
         self.assertEquals(32, len(ast[0]['children']))
         palette1 = [0x0f, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09,
                     0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f]
-        for i in range(len(palette1)):
-            h = '$%02X' % palette1[i]
+        for i, p in enumerate(palette1):
+            h = '$%02X' % p
             self.assertEquals(h, ast[0]['children'][i * 2 + 1]['value'])
             self.assertEquals('S_DIRECTIVE', ast[1]['type'])
 
@@ -87,8 +87,8 @@ class CompilerTest(unittest.TestCase):
         self.assertEquals(32, len(ast[1]['children']))
         palette2 = [0x0f, 0x30, 0x31, 0x32, 0x33, 0x35, 0x36, 0x37, 0x38, 0x39,
                     0x3a, 0x3b, 0x3c, 0x3d, 0x3e, 0x0f]
-        for i in range(len(palette2)):
-            h = '$%02X' % palette2[i]
+        for i, p in enumerate(palette2):
+            h = '$%02X' % p
             self.assertEquals(h, ast[1]['children'][i * 2 + 1]['value'])
 
     def test_instructions_with_labels(self):
