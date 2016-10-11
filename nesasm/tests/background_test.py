@@ -2,7 +2,6 @@
 from nesasm.tests import HexTestCase
 from nesasm.compiler import lexical, syntax, semantic
 from nesasm.cartridge import Cartridge
-from unittest import skip
 
 
 class BackgroundTest(HexTestCase):

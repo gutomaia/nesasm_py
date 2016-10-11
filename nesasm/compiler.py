@@ -3,7 +3,6 @@ from re import match
 
 from lexical import analyse
 from nesasm.c6502 import opcodes, address_mode_def
-import os
 import io
 
 from nesasm.directives import directive_list
