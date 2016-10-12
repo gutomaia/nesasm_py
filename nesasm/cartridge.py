@@ -1,3 +1,6 @@
+NES_ID = [0x4e, 0x45, 0x53, 0x1a]
+
+
 class Cartridge(object):
 
     def __init__(self):
@@ -11,15 +14,10 @@ class Cartridge(object):
         self.rs = 0
         self.path = ''
 
-    def nes_id(self):
-        # NES
-        return [0x4e, 0x45, 0x53, 0x1a]
-
     def nes_get_header(self):
-        _id = self.nes_id()
         unused = [0, 0, 0, 0, 0, 0, 0, 0]
         header = []
-        header.extend(_id)
+        header.extend(NES_ID)
         header.append(self.inespgr)
         header.append(self.ineschr)
         header.append(self.inesmir)
