@@ -145,8 +145,8 @@ class CompilerTest(unittest.TestCase):
 
         self.assertEquals(expected, labels)
 
+    @unittest.skip('TODO:')
     def test_raise_erro_with_unknow_label(self):
-        return
         with self.assertRaises(Exception):
             tokens = lexical('LDA unknow')
             list(tokens)
