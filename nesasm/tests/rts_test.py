@@ -2,17 +2,12 @@
 
 import unittest
 
-from nesasm.compiler import lexical, syntax, semantic
+from nesasm.tests import MetaInstructionCase
 
 
-class RtsTest(unittest.TestCase):
-
-    def test_rts_sngl(self):
-        tokens = list(lexical('RTS'))
-        self.assertEquals(1, len(tokens))
-        self.assertEquals('T_INSTRUCTION', tokens[0]['type'])
-        ast = syntax(tokens)
-        self.assertEquals(1, len(ast))
-        self.assertEquals('S_IMPLIED', ast[0]['type'])
-        code = semantic(ast)
-        self.assertEquals(code, [0x60])
+class RtsSnglTest(unittest.TestCase):
+    __metaclass__ = MetaInstructionCase
+    asm = 'RTS'
+    lex = [('T_INSTRUCTION', 'RTS')]
+    syn = ['S_IMPLIED']
+    code = [0x60]
