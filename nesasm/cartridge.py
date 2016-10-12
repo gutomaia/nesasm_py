@@ -74,8 +74,8 @@ class Cartridge(object):
         opcodes = []
         nes_header = self.nes_get_header()
         opcodes.extend(nes_header)
-        for i in self.banks:
-            for j in range(len(self.banks[i]['code']), self.banks[i]['size']):
-                self.banks[i]['code'].append(0xff)
-            opcodes.extend(self.banks[i]['code'])
+        for k, bank in self.banks.iteritems():
+            for _ in range(len(bank['code']), bank['size']):
+                bank['code'].append(0xff)
+            opcodes.extend(bank['code'])
         return opcodes
