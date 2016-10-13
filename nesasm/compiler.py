@@ -16,8 +16,8 @@ asm65_tokens = [
                 'LDA|LDX|LDY|LSR|NOP|ORA|PHA|PHP|PLA|PLP|ROL|ROR|RTI|RTS|SBC|'
                 'SEC|SED|SEI|STA|STX|STY|TAX|TAY|TSX|TXA|TXS|TYA)'),
          store=True),
-    dict(type='T_ADDRESS', regex=r'\$([\dA-F]{2,4})', store=True),
-    dict(type='T_HEX_NUMBER', regex=r'\#\$([\dA-F]{2})', store=True),
+    dict(type='T_ADDRESS', regex=r'\$([\dA-Fa-f]{2,4})', store=True),
+    dict(type='T_HEX_NUMBER', regex=r'\#\$([\dA-Fa-f]{2})', store=True),
     dict(type='T_BINARY_NUMBER', regex=r'\#?%([01]{8})', store=True),
     dict(type='T_DECIMAL_NUMBER', regex=r'\#(\d{1,3})', store=True),
     dict(type='T_LABEL', regex=r'^([a-zA-Z]{2}[a-zA-Z\d]*)\:', store=True),

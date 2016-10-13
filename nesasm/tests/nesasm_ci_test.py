@@ -108,7 +108,13 @@ class NESAsmCiSuite(object):
 
         labels_py = {k:'${:02X}'.format(v) for k,v in _items()}
 
-        self.assertEquals(labels_c, labels_py)
+        try:
+            self.assertEquals(labels_c, labels_py)
+        except AssertionError:
+            for k,v in labels_c.items():
+                if v != labels_py[k]:
+                    print k, v, labels_py[k]
+            raise
 
 
 class MovingspriteTest(NESAsmCiSuite, HexFileTestCase):
@@ -141,3 +147,7 @@ class Scrolling4Test(NESAsmCiSuite, HexFileTestCase):
 
 class Scrolling5Test(NESAsmCiSuite, HexFileTestCase):
     fixture = 'nerdynights/scrolling/scrolling5.asm'
+
+
+class ConnectednesTest(NESAsmCiSuite, HexFileTestCase):
+    fixture = 'connectednes/connected.asm'
