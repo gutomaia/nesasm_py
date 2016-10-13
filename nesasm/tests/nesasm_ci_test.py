@@ -86,6 +86,26 @@ class NESAsmCiSuite(object):
 
         self.assertHexFileEquals(_output_c, _output_py)
 
+    def test_compare_labels(self):
+        labels_file = splitext(self._input_c)[0] + '.fns'
+        labels_c = {}
+        with open(labels_file, 'r') as f:
+            for line in f:
+                if not line.startswith(';'):
+                    key, value = [ d.strip() for d in line.split('=')]
+                    labels_c[key] = value
+        print labels_c
+
+        from nesasm.compiler import lexical, syntax, get_labels
+
+        with open(self._input_py) as f:
+            source = f.read()
+
+        ast = syntax(lexical(source))
+        labels_py = {k:'${:02X}'.format(v) for k,v in get_labels(ast).iteritems()}
+
+        self.assertEquals(labels_c, labels_py)
+
 
 class MovingspriteTest(NESAsmCiSuite, HexFileTestCase):
     fixture = 'movingsprite/movingsprite.asm'
