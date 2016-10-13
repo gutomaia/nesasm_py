@@ -94,7 +94,6 @@ class NESAsmCiSuite(object):
                 if not line.startswith(';'):
                     key, value = [ d.strip() for d in line.split('=')]
                     labels_c[key] = value
-        print labels_c
 
         from nesasm.compiler import lexical, syntax, get_labels
 
@@ -102,7 +101,12 @@ class NESAsmCiSuite(object):
             source = f.read()
 
         ast = syntax(lexical(source))
-        labels_py = {k:'${:02X}'.format(v) for k,v in get_labels(ast).iteritems()}
+        try:
+            _items = get_labels(ast).iteritems
+        except AttributeError:
+            _items = get_labels(ast).items
+
+        labels_py = {k:'${:02X}'.format(v) for k,v in _items()}
 
         self.assertEquals(labels_c, labels_py)
 
