@@ -160,7 +160,7 @@ ResetTopSprite:
     LDA randompointer
     AND #%00111111
     TAY
-    LDA random,y ; HERE
+    LDA random,y
     STA $0303,x
     STA $030F,x
     STA $031B,x
@@ -357,7 +357,7 @@ LoadDefaultPal:         ; "Load Default palette" subroutine         ;;
     STA $2006                                                       ;;
     LDX #$00                                                        ;;
 LoadDefaultPalLoop:                                                 ;;
-    LDA defaultpal, x                                               ;; HERE
+    LDA defaultpal, x                                               ;;
     STA $2007                                                       ;;
     INX                                                             ;;
     CPX #$20                                                        ;;
@@ -371,7 +371,7 @@ LoadBG:                 ; "Load background" subroutine              ;;
     STA $2006                                                       ;;
     LDX #$00                                                        ;;
 LoadPalLoop:            ; Default palette is loaded on reset        ;;
-    ;LDA defaultpal, x                                               ;; HERE
+    LDA defaultpal, x                                               ;;
     STA $2007                                                       ;;
     INX                                                             ;;
     CPX #$20                                                        ;;
@@ -388,17 +388,17 @@ LoadTitleNewNam1:       ; Load first set of 256 background tiles    ;;
     INX                                                             ;;
     BNE LoadTitleNewNam1                                            ;;
 LoadTitleNewNam2:       ; Load second set of 256 background tiles   ;;
-    ;LDA background2,x                                               ;; HERE
+    LDA background2,x                                               ;;
     STA $2007                                                       ;;
     INX                                                             ;;
     BNE LoadTitleNewNam2                                            ;;
 LoadTitleNewNam3:       ; Load third set of 256 background tiles    ;;
-    ; LDA background3,x                                               ;; HERE
+    LDA background3,x                                               ;;
     STA $2007                                                       ;;
     INX                                                             ;;
     BNE LoadTitleNewNam3                                            ;;
 LoadTitleNewNam4:       ; Load fourth set of background tiles       ;;
-    ; LDA background4,x                                               ;; HERE
+    LDA background4,x                                               ;;
     STA $2007                                                       ;;
     INX                                                             ;;
     CPX #$E0            ; (Don't have to load all 256)              ;;
@@ -410,7 +410,7 @@ LoadAttr:               ; Load initial attribute values for BG      ;;
     STA $2006                                                       ;;
     LDX #$00                                                        ;;
 LoadAttrLoop:                                                       ;;
-    ;LDA attr, x                                                     ;; HERE
+    LDA attr, x                                                     ;;
     STA $2007                                                       ;;
     INX                                                             ;;
     CPX #$40                                                        ;;
@@ -419,7 +419,7 @@ LoadAttrLoop:                                                       ;;
 LoadSpr:                ; Load initial sprite values                ;;
     LDX #$00                                                        ;;
 LoadSprLoop:                                                        ;;
-    ; LDA tweetatme,x                                                 ;; HERE
+    LDA tweetatme,x                                                 ;;
     STA $0300,x                                                     ;;
     INX                                                             ;;
     BNE LoadSprLoop                                                 ;;
@@ -581,6 +581,6 @@ random:
                                                                     ;;
     .bank 4             ; Bank 4                                    ;;
     .org $0000          ; Starts at $0000 (CHR)                     ;;
-    .incbin "ascii.chr"   ; Include graphics binary                 ;;
+;    .incbin "ascii.chr"   ; Include graphics binary                 ;; HERE
                                                                     ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

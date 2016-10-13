@@ -42,7 +42,8 @@ def d_dw(arg, cart):
 
 
 def d_incbin(arg, cart):
-    f = open(cart.path + arg, 'rb')
+    from os.path import join
+    f = open(join(cart.path, arg), 'rb')
     content = f.read()
     for c in content:
         if isinstance(c, str):

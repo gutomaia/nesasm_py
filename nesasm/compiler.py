@@ -4,7 +4,8 @@ from re import match
 from lexical import analyse
 from nesasm.c6502 import opcodes, address_mode_def
 import io
-
+from os import stat
+from os.path import join
 from nesasm.directives import directive_list
 from nesasm.cartridge import Cartridge
 
@@ -305,7 +306,7 @@ def syntax(tokens):
     return ast
 
 
-def get_labels(ast):
+def get_labels(ast, path=None):
     labels = {}
     address = 0
     for leaf in ast:
@@ -326,14 +327,18 @@ def get_labels(ast):
                     address += 1
         elif ('S_DIRECTIVE' == leaf['type']
                 and '.incbin' == leaf['children'][0]['value']):
-            address += 4 * 1024  # TODO check file size;
+            if path:
+                filename = join(path, leaf['children'][1]['value'][1:-1])
+            else:
+                filename = leaf['children'][1]['value'][1:-1]
+            address += stat(filename).st_size
     return labels
 
 
 def semantic(ast, iNES=False, cart=None):
     if cart is None:
         cart = Cartridge()
-    labels = get_labels(ast)
+    labels = get_labels(ast, cart.path)
     address = 0
     # translate statments to opcode
     for leaf in ast:

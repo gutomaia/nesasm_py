@@ -98,7 +98,7 @@ class MovingSpriteTest(HexTestCase):
         expected['WAITVBLANK'] = 0xC000
         expected['palette'] = 0xE000
         expected['sprites'] = 0xE000 + 32
-        actual = get_labels(self.ast)
+        actual = get_labels(self.ast, 'fixtures/movingsprite/')
         self.assertEquals(expected['WAITVBLANK'], actual['WAITVBLANK'])
         self.assertEquals(expected['palette'], actual['palette'])
         self.assertEquals(expected['sprites'], actual['sprites'])

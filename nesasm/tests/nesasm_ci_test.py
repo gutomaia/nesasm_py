@@ -99,12 +99,12 @@ class NESAsmCiSuite(object):
 
         with open(self._input_py) as f:
             source = f.read()
-
         ast = syntax(lexical(source))
+        path = dirname(self._input_py)
         try:
-            _items = get_labels(ast).iteritems
+            _items = get_labels(ast, path).iteritems
         except AttributeError:
-            _items = get_labels(ast).items
+            _items = get_labels(ast, path).items
 
         labels_py = {k:'${:02X}'.format(v) for k,v in _items()}
 
@@ -113,7 +113,7 @@ class NESAsmCiSuite(object):
         except AssertionError:
             for k,v in labels_c.items():
                 if v != labels_py[k]:
-                    print k, v, labels_py[k]
+                    print (k, v, labels_py[k])
             raise
 
 
