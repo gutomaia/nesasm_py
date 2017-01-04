@@ -1,17 +1,12 @@
 # -*- coding: utf-8 -*-
 import unittest
 
-from nesasm.compiler import lexical, syntax, semantic
+from nesasm.tests import MetaInstructionCase
 
 
-class TyaTest(unittest.TestCase):
-
-    def test_tya_sngl(self):
-        tokens = list(lexical('TYA'))
-        self.assertEquals(1, len(tokens))
-        self.assertEquals('T_INSTRUCTION', tokens[0]['type'])
-        ast = syntax(tokens)
-        self.assertEquals(1, len(ast))
-        self.assertEquals('S_IMPLIED', ast[0]['type'])
-        code = semantic(ast)
-        self.assertEquals(code, [0x98])
+class TyaSnglTest(unittest.TestCase):
+    __metaclass__ = MetaInstructionCase
+    asm = 'TYA'
+    lex = [('T_INSTRUCTION', 'TYA')]
+    syn = ['S_IMPLIED']
+    code = [0x98]

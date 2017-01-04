@@ -2,17 +2,12 @@
 
 import unittest
 
-from nesasm.compiler import lexical, syntax, semantic
+from nesasm.tests import MetaInstructionCase
 
 
-class NopTest(unittest.TestCase):
-
-    def test_nop_sngl(self):
-        tokens = list(lexical('NOP'))
-        self.assertEquals(1, len(tokens))
-        self.assertEquals('T_INSTRUCTION', tokens[0]['type'])
-        ast = syntax(tokens)
-        self.assertEquals(1, len(ast))
-        self.assertEquals('S_IMPLIED', ast[0]['type'])
-        code = semantic(ast)
-        self.assertEquals(code, [0xea])
+class NopSnglTest(unittest.TestCase):
+    __metaclass__ = MetaInstructionCase
+    asm = 'NOP'
+    lex = [('T_INSTRUCTION', 'NOP')]
+    syn = ['S_IMPLIED']
+    code = [0xea]

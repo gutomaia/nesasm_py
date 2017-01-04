@@ -6,8 +6,10 @@
 *~
 .DS_Store
 .checkpoint/
+.coverage
 .tox/
 build/
+coverage.xml
 deps/
 dist/
 github.mk

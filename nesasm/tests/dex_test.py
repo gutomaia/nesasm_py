@@ -2,17 +2,12 @@
 
 import unittest
 
-from nesasm.compiler import lexical, syntax, semantic
+from nesasm.tests import MetaInstructionCase
 
 
-class DexTest(unittest.TestCase):
-
-    def test_dex_sngl(self):
-        tokens = list(lexical('DEX'))
-        self.assertEquals(1, len(tokens))
-        self.assertEquals('T_INSTRUCTION', tokens[0]['type'])
-        ast = syntax(tokens)
-        self.assertEquals(1, len(ast))
-        self.assertEquals('S_IMPLIED', ast[0]['type'])
-        code = semantic(ast)
-        self.assertEquals(code, [0xca])
+class DexSnglTest(unittest.TestCase):
+    __metaclass__ = MetaInstructionCase
+    asm = 'DEX'
+    lex = [('T_INSTRUCTION', 'DEX')]
+    syn = ['S_IMPLIED']
+    code = [0xca]

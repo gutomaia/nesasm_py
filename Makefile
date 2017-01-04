@@ -39,6 +39,7 @@ clean: python_clean
 purge: python_purge
 	@rm -rf python.mk github.mk
 	@rm -rf tools
+	@rm -rf .tox
 
 build: python_build
 

@@ -27,6 +27,7 @@ class MetaInstructionCase(type):
 
                 ast = syntax(tokens)
                 self.assertEquals(1, len(self.syn))
+                self.assertEquals(ast[0]['type'], self.syn[0])
             return test
 
         def gen_sem():

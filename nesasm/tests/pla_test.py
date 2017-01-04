@@ -2,17 +2,12 @@
 
 import unittest
 
-from nesasm.compiler import lexical, syntax, semantic
+from nesasm.tests import MetaInstructionCase
 
 
-class PlaTest(unittest.TestCase):
-
-    def test_pla_sngl(self):
-        tokens = list(lexical('PLA'))
-        self.assertEquals(1, len(tokens))
-        self.assertEquals('T_INSTRUCTION', tokens[0]['type'])
-        ast = syntax(tokens)
-        self.assertEquals(1, len(ast))
-        self.assertEquals('S_IMPLIED', ast[0]['type'])
-        code = semantic(ast)
-        self.assertEquals(code, [0x68])
+class PlaSnglTest(unittest.TestCase):
+    __metaclass__ = MetaInstructionCase
+    asm = 'PLA'
+    lex = [('T_INSTRUCTION', 'PLA')]
+    syn = ['S_IMPLIED']
+    code = [0x68]

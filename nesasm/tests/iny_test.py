@@ -2,17 +2,12 @@
 
 import unittest
 
-from nesasm.compiler import lexical, syntax, semantic
+from nesasm.tests import MetaInstructionCase
 
 
-class InyTest(unittest.TestCase):
-
-    def test_iny_sngl(self):
-        tokens = list(lexical('INY'))
-        self.assertEquals(1, len(tokens))
-        self.assertEquals('T_INSTRUCTION', tokens[0]['type'])
-        ast = syntax(tokens)
-        self.assertEquals(1, len(ast))
-        self.assertEquals('S_IMPLIED', ast[0]['type'])
-        code = semantic(ast)
-        self.assertEquals(code, [0xc8])
+class InySnglTest(unittest.TestCase):
+    __metaclass__ = MetaInstructionCase
+    asm = 'INY'
+    lex = [('T_INSTRUCTION', 'INY')]
+    syn = ['S_IMPLIED']
+    code = [0xc8]
