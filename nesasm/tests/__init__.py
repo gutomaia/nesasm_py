@@ -43,7 +43,7 @@ class MetaInstructionCase(type):
 
         args['test_lexical'] = gen_lex()
         args['test_syntax'] = gen_syn()
-        args['test__semantic'] = gen_sem()
+        args['test_semantic'] = gen_sem()
 
         return type.__new__(cls, name, bases, args)
 
