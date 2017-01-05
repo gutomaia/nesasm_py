@@ -3,6 +3,7 @@
 from unittest import TestCase
 from nesasm.compiler import compile
 import os
+import re
 
 from nesasm.compiler import lexical, syntax, semantic
 
@@ -41,9 +42,12 @@ class MetaInstructionCase(type):
                 self.assertEquals(compiled, self.code)
             return test
 
-        args['test_lexical'] = gen_lex()
-        args['test_syntax'] = gen_syn()
-        args['test_semantic'] = gen_sem()
+        s1 = re.sub('(.)([A-Z][a-z]+)', r'\1_\2', name)
+        s2 = re.sub('([a-z0-9])([A-Z])', r'\1_\2', s1).lower()
+        s3 = re.sub('_test$', '', s2)
+        args['test_%s_lexical' % s3] = gen_lex()
+        args['test_%s_syntax' % s3] = gen_syn()
+        args['test_%s_semantic' % s3] = gen_sem()
 
         return type.__new__(cls, name, bases, args)
 
