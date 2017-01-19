@@ -305,9 +305,12 @@ def syntax(tokens):
     return ast
 
 
-def get_labels(ast):
+def get_labels(ast, cart=None):
     labels = {}
-    address = 0
+    if cart and len(cart.banks) == 1:
+        address = cart.banks[0]['start']
+    else:
+        address = 0
     for leaf in ast:
         if ('S_DIRECTIVE' == leaf['type']
                 and '.org' == leaf['children'][0]['value']):
@@ -333,7 +336,7 @@ def get_labels(ast):
 def semantic(ast, iNES=False, cart=None):
     if cart is None:
         cart = Cartridge()
-    labels = get_labels(ast)
+    labels = get_labels(ast, cart)
     address = 0
     # translate statments to opcode
     for leaf in ast:
