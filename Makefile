@@ -77,12 +77,21 @@ tdd:
 tox: ${REQUIREMENTS_TEST}
 	${VIRTUALENV} tox
 
+${HOME}/.pypirc:
+	@echo "[distutils]" >> $@
+	@echo "index-servers = pypi" >> $@
+	@echo "" >> $@
+	@echo "[pypi]" >> $@
+	@echo "username = ${PYPI_USERNAME}" >> $@
+	@echo "password = ${PYPI_PASSWORD}" >> $@
+	@touch $@
+
 dist: python_egg python_wheel
 
 register:
 	${VIRTUALENV} python setup.py register -r pypi
 
-distribute: dist
+distribute: dist ${HOME}/.pypirc
 	${VIRTUALENV} python setup.py bdist_egg bdist_wheel upload -r pypi
 
 .PHONY: install clean report dist register distribute ghpages
