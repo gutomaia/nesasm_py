@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 import os
 from setuptools import setup, find_packages
-from distutils.core import Command
-from unittest import TextTestRunner, TestLoader
 
 here = os.path.abspath(os.path.dirname(__file__))
 
@@ -11,23 +9,6 @@ with open(os.path.join(here, 'VERSION.txt')) as f:
 
 with open(os.path.join(here, 'requirements.txt')) as f:
     REQUIREMENTS = [line for line in iter(f)]
-
-
-class TestCommand(Command):
-
-    user_options = []
-
-    def initialize_options(self):
-        pass
-
-    def finalize_options(self):
-        pass
-
-    def run(self):
-        loader = TestLoader()
-        suite = loader.discover('nesasm/tests', pattern='*_test.py')
-        TextTestRunner(verbosity=4).run(suite)
-
 
 setup(
     name='nesasm',
@@ -49,7 +30,5 @@ setup(
         'Topic :: Software Development :: Embedded Systems',
     ],
     url='http://github.com/gutomaia/nesasm_py/',
-    cmdclass={'test': TestCommand},
-    test_suite='nesasm.tests',
     install_requires=REQUIREMENTS,
 )
