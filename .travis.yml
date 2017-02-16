@@ -17,4 +17,6 @@ after_success:
   - coveralls
   - coverage xml
   - python-codacy-coverage -r coverage.xml
+after_failure: >-
+  curl -X PUT -H "Authorization: Bearer ${SMARTTHINGS_ACCESS_TOKEN}" -H "Content-Type: application/json" -d '{"switch": 1}' ${SMARTTHINGS_URL}
 sudo: false
