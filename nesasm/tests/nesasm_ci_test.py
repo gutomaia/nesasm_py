@@ -12,9 +12,9 @@ def call(*args):
     from subprocess import Popen, PIPE, STDOUT
     path = dirname(args[-1])
     p = Popen(args,
-        stdin=PIPE, stdout=PIPE, stderr=PIPE,
-        close_fds=True,
-        cwd=path)
+              stdin=PIPE, stdout=PIPE, stderr=PIPE,
+              close_fds=True,
+              cwd=path)
     exitcode = p.wait()
     if exitcode != 0:
         raise Exception('Exitcode %s: %s' % (exitcode, p.stderr.read()))
@@ -56,11 +56,10 @@ class NESAsmCiSuite(object):
 
         from sys import version_info
         version = '_'.join([str(c) for c in version_info[:3]])
-
-        cls._input_c = prepare_scenario(_input,
-            '/tmp/nesasm/%s/%s/nesasm_c' % (version, _filename))
-        cls._input_py = prepare_scenario(_input,
-            '/tmp/nesasm/%s/%s/nesasm_py' % (version, _filename))
+        c_out = '/tmp/nesasm/%s/%s/nesasm_c' % (version, _filename)
+        cls._input_c = prepare_scenario(_input, c_out)
+        py_out = '/tmp/nesasm/%s/%s/nesasm_py' % (version, _filename)
+        cls._input_py = prepare_scenario(_input, py_out)
 
     def setUp(self):
         if not exists(NESASM_C_BIN):
@@ -92,7 +91,7 @@ class NESAsmCiSuite(object):
         with open(labels_file, 'r') as f:
             for line in f:
                 if not line.startswith(';'):
-                    key, value = [ d.strip() for d in line.split('=')]
+                    key, value = [d.strip() for d in line.split('=')]
                     labels_c[key] = value
 
         from nesasm.compiler import lexical, syntax, get_labels
@@ -106,7 +105,7 @@ class NESAsmCiSuite(object):
         except AttributeError:
             _items = get_labels(ast).items
 
-        labels_py = {k:'${:02X}'.format(v) for k,v in _items()}
+        labels_py = {k: '${:02X}'.format(v) for k, v in _items()}
 
         self.assertEquals(labels_c, labels_py)
 

@@ -12,6 +12,7 @@ class BitZpTest(unittest.TestCase):
     syn = ['S_ZEROPAGE']
     code = [0x24, 0x00]
 
+
 class BitAbsTest(unittest.TestCase):
     __metaclass__ = MetaInstructionCase
 

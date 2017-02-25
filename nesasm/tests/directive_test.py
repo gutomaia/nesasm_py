@@ -107,8 +107,8 @@ class DirectiveTest(unittest.TestCase):
         # self.assertEquals(0xfffa, get_pc())
 
     def test_db_1(self):
-        code = ('.db $0F,$01,$02,$03,$04,$05,$06,$07,' # One-liner string
-                    '$08,$09,$0A,$0B,$0C,$0D,$0E,$0F')
+        code = ('.db $0F,$01,$02,$03,$04,$05,$06,$07,'  # One-liner string
+                '    $08,$09,$0A,$0B,$0C,$0D,$0E,$0F')
         tokens = list(lexical(code))
         self.assertEquals(32, len(tokens))
         self.assertEquals('T_DIRECTIVE', tokens[0]['type'])
@@ -125,8 +125,8 @@ class DirectiveTest(unittest.TestCase):
         self.assertEquals(expected, code)
 
     def test_db_2(self):
-        code = ('.db $0F,$30,$31,$32,$33,$35,$36,$37,' # One-liner string
-                    '$38,$39,$3A,$3B,$3C,$3D,$3E,$0F')
+        code = ('.db $0F,$30,$31,$32,$33,$35,$36,$37,'  # One-liner string
+                '    $38,$39,$3A,$3B,$3C,$3D,$3E,$0F')
         tokens = list(lexical(code))
         self.assertEquals(32, len(tokens))
         self.assertEquals('T_DIRECTIVE', tokens[0]['type'])
@@ -170,7 +170,9 @@ class DirectiveTest(unittest.TestCase):
         self.assertEquals(expected, code)
 
     def test_db_5_with_binary(self):
-        code = '.db %00000000, %00010000, %01010000, %00010000, %00000000, %00000000, %00000000, %00110000'
+        code = ('.db %00000000, %00010000, %01010000, '
+                '%00010000, %00000000, %00000000, '
+                '%00000000, %00110000')
         tokens = list(lexical(code))
         self.assertEquals(16, len(tokens))
         self.assertEquals('T_DIRECTIVE', tokens[0]['type'])

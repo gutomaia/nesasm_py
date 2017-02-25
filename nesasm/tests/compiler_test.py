@@ -3,7 +3,8 @@
 import unittest
 from types import GeneratorType
 from nesasm.compiler import (lexical, syntax,
-                            t_zeropage, t_address, t_separator, get_labels)
+                             t_zeropage, t_address,
+                             t_separator, get_labels)
 
 
 class CompilerTest(unittest.TestCase):
@@ -64,9 +65,9 @@ class CompilerTest(unittest.TestCase):
 
     def test_compile_list(self):
         code = '''
-            palette:
-              .db $0F,$01,$02,$03,$04,$05,$06,$07,$08,$09,$0A,$0B,$0C,$0D,$0E,$0F
-              .db $0F,$30,$31,$32,$33,$35,$36,$37,$38,$39,$3A,$3B,$3C,$3D,$3E,$0F
+        palette:
+          .db $0F,$01,$02,$03,$04,$05,$06,$07,$08,$09,$0A,$0B,$0C,$0D,$0E,$0F
+          .db $0F,$30,$31,$32,$33,$35,$36,$37,$38,$39,$3A,$3B,$3C,$3D,$3E,$0F
         '''
         tokens = list(lexical(code))
         ast = syntax(tokens)
@@ -114,15 +115,15 @@ class CompilerTest(unittest.TestCase):
 
     def test_several_lists_with_labels(self):
         code = '''
-            .org $E000
+        .org $E000
 
-            palette:
-              .db $0F,$01,$02,$03,$04,$05,$06,$07,$08,$09,$0A,$0B,$0C,$0D,$0E,$0F
-              .db $0F,$30,$31,$32,$33,$35,$36,$37,$38,$39,$3A,$3B,$3C,$3D,$3E,$0F
+        palette:
+          .db $0F,$01,$02,$03,$04,$05,$06,$07,$08,$09,$0A,$0B,$0C,$0D,$0E,$0F
+          .db $0F,$30,$31,$32,$33,$35,$36,$37,$38,$39,$3A,$3B,$3C,$3D,$3E,$0F
 
-            sprites:
-              .db $80, $00, $03, $80; Y pos, tile id, attributes, X pos
-              '''
+        sprites:
+          .db $80, $00, $03, $80; Y pos, tile id, attributes, X pos
+        '''
 
         tokens = list(lexical(code))
         ast = syntax(tokens)
@@ -154,4 +155,3 @@ class CompilerTest(unittest.TestCase):
     def test_lexical_returns_a_generator(self):
         tokens = lexical('BIT $00')
         self.assertIsInstance(tokens, GeneratorType)
-

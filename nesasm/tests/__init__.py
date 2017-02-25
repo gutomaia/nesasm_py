@@ -7,6 +7,7 @@ import re
 
 from nesasm.compiler import lexical, syntax, semantic
 
+
 class MetaInstructionCase(type):
 
     def __new__(cls, name, bases, args):
@@ -14,7 +15,7 @@ class MetaInstructionCase(type):
             def test(self):
                 tokens = list(lexical(self.asm))
                 self.assertEquals(len(tokens), len(self.lex))
-                for i,l in enumerate(self.lex):
+                for i, l in enumerate(self.lex):
                     self.assertEquals(l[0], tokens[i]['type'])
                     self.assertEquals(l[1], tokens[i]['value'])
             return test
@@ -54,7 +55,6 @@ class MetaInstructionCase(type):
 
 class FileTestCase(TestCase):
 
-
     def assertFileExists(self, filename):
         try:
             self.assertTrue(os.path.exists(filename))
@@ -69,7 +69,6 @@ class FileTestCase(TestCase):
 
 
 class HexTestCase(TestCase):
-
 
     def assertHexEquals(self, expected, actual):
         OKGREEN = '\033[92m'

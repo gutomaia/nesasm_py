@@ -5,6 +5,7 @@ from lexical import code_line_generator
 from types import GeneratorType
 from tempfile import NamedTemporaryFile
 
+
 class CodeLineGeneratorTest(TestCase):
 
     def test_unicode(self):

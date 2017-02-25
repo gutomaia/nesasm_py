@@ -66,7 +66,7 @@ class AdcZpxTest(unittest.TestCase):
     __metaclass__ = MetaInstructionCase
     asm = 'ADC $10,X'
     lex = [('T_INSTRUCTION', 'ADC'), ('T_ADDRESS', '$10'),
-           ('T_SEPARATOR', ','),('T_REGISTER','X')]
+           ('T_SEPARATOR', ','), ('T_REGISTER', 'X')]
     syn = ['S_ZEROPAGE_X']
     code = [0x75, 0x10]
 

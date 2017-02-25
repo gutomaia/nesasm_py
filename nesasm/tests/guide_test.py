@@ -8,7 +8,6 @@ import unittest
 from nesasm.compiler import lexical, syntax
 
 
-
 class GuideTest(unittest.TestCase):
 
     def test_example_16_bit_subtraction_routine(self):

@@ -11,7 +11,6 @@ from nesasm.compiler import lexical, syntax, semantic
 
 class EorTest(unittest.TestCase):
 
-
     def test_eor_imm(self):
         '''Test logical EOR operation between $10 (Decimal 16) and the
         content of the Accumulator'''
@@ -24,7 +23,6 @@ class EorTest(unittest.TestCase):
         self.assertEquals('S_IMMEDIATE', ast[0]['type'])
         code = semantic(ast)
         self.assertEquals(code, [0x49, 0x10])
-
 
     def test_eor_imm_with_decimal(self):
         '''Test logical EOR operation between 10 (Decimal 10) and the
@@ -39,7 +37,6 @@ class EorTest(unittest.TestCase):
         code = semantic(ast)
         self.assertEquals(code, [0x49, 0x0a])
 
-
     def test_eor_imm_with_binary(self):
         '''Test logical EOR operation between binary %00000100
         (Decimal 4) and the content of the Accumulator'''
@@ -52,7 +49,6 @@ class EorTest(unittest.TestCase):
         self.assertEquals('S_IMMEDIATE', ast[0]['type'])
         code = semantic(ast)
         self.assertEquals(code, [0x49, 0x04])
-
 
     def test_eor_zp(self):
         '''Test logical EOR operation between the content of the

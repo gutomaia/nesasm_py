@@ -12,6 +12,7 @@ asm_test_tokens = [
     dict(type='T_COMMENT', regex=r'^;[^\n]*', store=False)
 ]
 
+
 class AnalyzerTest(TestCase):
 
     def test_raise_unknown_token(self):
@@ -20,7 +21,7 @@ class AnalyzerTest(TestCase):
         self.assertEquals('T_FAKE_INSTRUCTION', next(tokens)['type'])
         self.assertEquals('T_SOME_SYMBOL', next(tokens)['type'])
         with self.assertRaises(UnknownToken):
-            next(tokens) # unknown
+            next(tokens)  # unknown
 
     def test_unknown_token_message(self):
         tokens = analyse(';test\n  @--Case \n;TUTEM acronym test',
@@ -33,15 +34,15 @@ class AnalyzerTest(TestCase):
         ut = r.exception
         self.assertEquals(2, ut.line)
         self.assertEquals(3, ut.column)
-        self.assertEquals('  @--Case \n', ut.line_code) # W/ trail wspaces
+        self.assertEquals('  @--Case \n', ut.line_code)  # W/ trail wspaces
         self.assertEquals('Unknown token @(2,3):   @--Case', ut.message)
 
     def test_empty_token_types_list(self):
         tokens = analyse('something', [])
         with self.assertRaises(UnknownToken):
-            next(tokens) # unknown
+            next(tokens)  # unknown
 
     def test_empty_inputs(self):
         tokens = analyse('', [])
         with self.assertRaises(StopIteration):
-            next(tokens) # unknown
+            next(tokens)  # unknown

@@ -12,7 +12,6 @@ from nesasm.compiler import lexical, syntax, semantic
 
 class OraTest(unittest.TestCase):
 
-
     def test_ora_imm(self):
         '''Test logical OR operation between $10 (Decimal 16) and the
         content of the Accumulator'''
@@ -25,7 +24,6 @@ class OraTest(unittest.TestCase):
         self.assertEquals('S_IMMEDIATE', ast[0]['type'])
         code = semantic(ast)
         self.assertEquals(code, [0x09, 0x10])
-
 
     def test_ora_imm_with_decimal(self):
         '''Test logical OR operation between #10 (Decimal 10) and the
@@ -40,7 +38,6 @@ class OraTest(unittest.TestCase):
         code = semantic(ast)
         self.assertEquals(code, [0x09, 0x0a])
 
-
     def test_ora_imm_with_binary(self):
         '''Test logical OR operation between binary #%00000100
         (Decimal 4) and the content of the Accumulator'''
@@ -53,7 +50,6 @@ class OraTest(unittest.TestCase):
         self.assertEquals('S_IMMEDIATE', ast[0]['type'])
         code = semantic(ast)
         self.assertEquals(code, [0x09, 0x04])
-
 
     def test_ora_zp(self):
         '''Test logical OR operation between the content of the

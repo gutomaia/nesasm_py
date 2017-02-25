@@ -225,7 +225,7 @@ asm65_bnf = [
 
 
 def lexical(code):
-    return analyse(code, asm65_tokens) # A generator
+    return analyse(code, asm65_tokens)
 
 
 def get_value(token, labels=None):
@@ -419,12 +419,14 @@ def compile_file(asmfile, output=None, path=None):
 
     write_bin_code(opcodes, output)
 
+
 def write_bin_code(code, file):
     target = open(file, 'wb')
     for opcode in code:
         target.write((bytearray((opcode,))))
 
     target.close()
+
 
 def compile(code, path):
 

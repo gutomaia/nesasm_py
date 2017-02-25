@@ -47,7 +47,8 @@ class CpmZpxTest(unittest.TestCase):
     __metaclass__ = MetaInstructionCase
 
     asm = 'CMP $10,X'
-    lex = [('T_INSTRUCTION', 'CMP'), ('T_ADDRESS', '$10'), ('T_SEPARATOR', ','), ('T_REGISTER', 'X')]
+    lex = [('T_INSTRUCTION', 'CMP'), ('T_ADDRESS', '$10'),
+           ('T_SEPARATOR', ','), ('T_REGISTER', 'X')]
     syn = ['S_ZEROPAGE_X']
     code = [0xd5, 0x10]
 
@@ -65,7 +66,8 @@ class CpmAbsxTest(unittest.TestCase):
     __metaclass__ = MetaInstructionCase
 
     asm = 'CMP $1234, X'
-    lex = [('T_INSTRUCTION', 'CMP'), ('T_ADDRESS', '$1234'), ('T_SEPARATOR', ','), ('T_REGISTER', 'X')]
+    lex = [('T_INSTRUCTION', 'CMP'), ('T_ADDRESS', '$1234'),
+           ('T_SEPARATOR', ','), ('T_REGISTER', 'X')]
     syn = ['S_ABSOLUTE_X']
     code = [0xdd, 0x34, 0x12]
 
@@ -74,7 +76,8 @@ class CpmAbsyTest(unittest.TestCase):
     __metaclass__ = MetaInstructionCase
 
     asm = 'CMP $1234, Y'
-    lex = [('T_INSTRUCTION', 'CMP'), ('T_ADDRESS', '$1234'), ('T_SEPARATOR', ','), ('T_REGISTER', 'Y')]
+    lex = [('T_INSTRUCTION', 'CMP'), ('T_ADDRESS', '$1234'),
+           ('T_SEPARATOR', ','), ('T_REGISTER', 'Y')]
     syn = ['S_ABSOLUTE_Y']
     code = [0xd9, 0x34, 0x12]
 

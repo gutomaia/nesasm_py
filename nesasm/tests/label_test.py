@@ -12,7 +12,6 @@ class LabelTest(TestCase):
             cart.set_org(start_addr)
         return get_labels(syntax(lexical(source)), cart)
 
-
     def test_waitvblank_label(self):
         code = '''
             WAITVBLANK:
