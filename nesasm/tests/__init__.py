@@ -28,17 +28,28 @@ class MetaInstructionCase(type):
                 ]
 
                 ast = syntax(tokens)
-                self.assertEquals(1, len(self.syn))
-                self.assertEquals(ast[0]['type'], self.syn[0])
+                self.assertEquals(len(ast), len(self.syn))
+                for i, a in enumerate(self.syn):
+                    self.assertEquals(ast[i]['type'], self.syn[i])
             return test
 
         def gen_sem():
             def test(self):
-                tokens = [
-                    {'type': l[0], 'value': l[1]}
-                    for l in self.lex
-                ]
-                ast = [{'type': self.syn[0], 'children': tokens}]
+                ast = []
+
+                token_counter = 0
+                for i, a in enumerate(self.syn):
+                    tokens = []
+                    for j, l in enumerate(self.lex[token_counter:]):
+                        if l[0] == 'T_ENDLINE':
+                            token_counter = j + 1
+                            break
+                        tokens.append({'type': l[0], 'value': l[1]})
+
+                    print {'type': self.syn[i], 'children': tokens}
+                    ast.append({'type': self.syn[i], 'children': tokens})
+
+                # print ast
                 compiled = semantic(ast)
                 self.assertEquals(compiled, self.code)
             return test

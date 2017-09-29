@@ -235,7 +235,7 @@ def lexical(code):
     return analyse(code, asm65_tokens)
 
 
-def get_value(token, labels=None):
+def get_value(token, labels=None, constants=None):
     if token['type'] == 'T_ADDRESS':
         m = match(asm65_tokens[1]['regex'], token['value'])
         return int(m.group(2), 16)
@@ -251,8 +251,10 @@ def get_value(token, labels=None):
     elif token['type'] == 'T_LABEL':
         m = match(asm65_tokens[5]['regex'], token['value'])
         return m.group(2)
-    elif token['type'] == 'T_MARKER' and token['value'] in labels:
+    elif labels and token['type'] == 'T_MARKER' and token['value'] in labels:
         return labels[token['value']]
+    elif constants and token['type'] == 'T_MARKER' and token['value'] in constants:
+        return constants[token['value']]
     elif token['type'] == 'T_DECIMAL_ARGUMENT':
         return int(token['value'])
     elif token['type'] == 'T_STRING':
@@ -337,23 +339,32 @@ def get_labels(ast, cart=None):
             address += 4 * 1024  # TODO check file size;
     return labels
 
+def get_constants(ast, cart):
+    constants = {}
+    for leaf in ast:
+        if ('S_CONSTANT' == leaf['type']):
+            name = leaf['children'][0]['value']
+            value =get_value(leaf['children'][2])
+            constants[name] = value
+    return constants
 
 def semantic(ast, iNES=False, cart=None):
     if cart is None:
         cart = Cartridge()
     labels = get_labels(ast, cart)
+    constants = get_constants(ast, cart)
     address = 0
     # translate statments to opcode
     for leaf in ast:
         if leaf['type'] == 'S_RS':
             labels[leaf['children'][0]['value']] = cart.rs
-            cart.rs += get_value(leaf['children'][2])
+            cart.rs += get_value(leaf['children'][2], labels, constants)
         elif leaf['type'] == 'S_CONSTANT':
             pass
         elif leaf['type'] == 'S_DIRECTIVE':
             directive = leaf['children'][0]['value']
             if len(leaf['children']) == 2:
-                argument = get_value(leaf['children'][1], labels)
+                argument = get_value(leaf['children'][1], labels, constants)
             else:
                 argument = leaf['children'][1:]
             if directive in directive_list:
@@ -366,11 +377,11 @@ def semantic(ast, iNES=False, cart=None):
                 address = False
             elif leaf['type'] == 'S_RELATIVE':
                 instruction = leaf['children'][0]['value'].upper()
-                address = get_value(leaf['children'][1], labels)
+                address = get_value(leaf['children'][1], labels, constants)
             elif leaf['type'] == 'S_IMMEDIATE_WITH_MODIFIER':
                 instruction = leaf['children'][0]['value'].upper()
                 modifier = leaf['children'][1]['value']
-                address = get_value(leaf['children'][3], labels)
+                address = get_value(leaf['children'][3], labels, constants)
                 if modifier == '#LOW':
                     address = (address & 0x00ff)
                 elif modifier == '#HIGH':
@@ -380,10 +391,11 @@ def semantic(ast, iNES=False, cart=None):
                                   'S_ZEROPAGE_Y', 'S_ABSOLUTE_X',
                                   'S_ABSOLUTE_Y']:
                 instruction = leaf['children'][0]['value'].upper()
-                address = get_value(leaf['children'][1], labels)
+                address = get_value(leaf['children'][1], labels, constants)
+                print 'address', address
             elif leaf['type'] in ['S_INDIRECT_X', 'S_INDIRECT_Y']:
                 instruction = leaf['children'][0]['value'].upper()
-                address = get_value(leaf['children'][2], labels)
+                address = get_value(leaf['children'][2], labels, constants)
 
             address_mode = address_mode_def[leaf['type']]['short']
             opcode = opcodes[instruction][address_mode]
