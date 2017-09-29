@@ -23,6 +23,7 @@ asm65_tokens = [
     dict(type='T_DECIMAL_NUMBER', regex=r'^(\#(\d{1,3}))', store=True),
     dict(type='T_LABEL', regex=r'^(([a-zA-Z]{2}[a-zA-Z\d]*)\:)', store=True),
     dict(type='T_MARKER', regex=r'^([a-zA-Z]{2}[a-zA-Z\d]*)', store=True),
+    dict(type='T_EQUAL', regex=r'^(=)', store=True),
     dict(type='T_STRING', regex=r'^("[^"]*")', store=True),
     dict(type='T_SEPARATOR', regex=r'^(,)', store=True),
     dict(type='T_ACCUMULATOR', regex=r'^(A|a)', store=True),
@@ -113,6 +114,8 @@ def t_address_or_t_marker(tokens, index):
 def t_address_or_t_binary_number(tokens, index):
     return OR([t_address, t_binary_number], tokens, index)
 
+def t_address_or_t_number(tokens, index):
+    return OR([t_address, t_number], tokens, index)
 
 def t_hex_number(tokens, index):
     return look_ahead(tokens, index, 'T_HEX_NUMBER')
@@ -129,6 +132,8 @@ def t_decimal_number(tokens, index):
 def t_number(tokens, index):
     return OR([t_hex_number, t_binary_number, t_decimal_number], tokens, index)
 
+def t_equal(tokens, index):
+    return look_ahead(tokens, index, 'T_EQUAL')
 
 def t_separator(tokens, index):
     return look_ahead(tokens, index, 'T_SEPARATOR')
@@ -198,6 +203,7 @@ asm65_bnf = [
     dict(type='S_RS', bnf=[t_marker, t_directive, t_directive_argument]),
     dict(type='S_DIRECTIVE', bnf=[t_directive, t_directive_argument]),
     dict(type='S_RELATIVE', bnf=[t_relative, t_address_or_t_marker]),
+    dict(type='S_CONSTANT', bnf=[t_marker, t_equal, t_address_or_t_number]),
     dict(type='S_IMMEDIATE', bnf=[t_instruction, t_number]),
     dict(type='S_IMMEDIATE_WITH_MODIFIER',
          bnf=[t_instruction, t_modifier, t_open, t_address_or_t_marker,
@@ -296,13 +302,9 @@ def syntax(tokens):
             if not move:
                 # TODO: deal with erros like on nodeNES
                 # walk = 0
-                print('------------')
-                print(tokens[x])
-                print(tokens[x + 1])
-                print(tokens[x + 2])
-                print(tokens[x + 3])
+                raise Exception('Invalid Syntax')
+                # rip syntax until the end of the line
 
-                raise Exception('UNKNOW TOKEN')
     return ast
 
 
@@ -313,6 +315,8 @@ def get_labels(ast, cart=None):
     else:
         address = 0
     for leaf in ast:
+        if ('S_CONSTANT' == leaf['type']):
+            continue
         if ('S_DIRECTIVE' == leaf['type']
                 and '.org' == leaf['children'][0]['value']):
             address = int(leaf['children'][1]['value'][1:], 16)
@@ -344,6 +348,8 @@ def semantic(ast, iNES=False, cart=None):
         if leaf['type'] == 'S_RS':
             labels[leaf['children'][0]['value']] = cart.rs
             cart.rs += get_value(leaf['children'][2])
+        elif leaf['type'] == 'S_CONSTANT':
+            pass
         elif leaf['type'] == 'S_DIRECTIVE':
             directive = leaf['children'][0]['value']
             if len(leaf['children']) == 2:
