@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from re import match
+from re import match, I
 
 from lexical import analyse
 from nesasm.c6502 import opcodes, address_mode_def
@@ -14,28 +14,29 @@ asm65_tokens = [
          regex=(r'^(ADC|AND|ASL|BCC|BCS|BEQ|BIT|BMI|BNE|BPL|BRK|BVC|BVS|CLC|'
                 'CLD|CLI|CLV|CMP|CPX|CPY|DEC|DEX|DEY|EOR|INC|INX|INY|JMP|JSR|'
                 'LDA|LDX|LDY|LSR|NOP|ORA|PHA|PHP|PLA|PLP|ROL|ROR|RTI|RTS|SBC|'
-                'SEC|SED|SEI|STA|STX|STY|TAX|TAY|TSX|TXA|TXS|TYA)'),
+                'SEC|SED|SEI|STA|STX|STY|TAX|TAY|TSX|TXA|TXS|TYA)\s'),
+         flags=I,
          store=True),
-    dict(type='T_ADDRESS', regex=r'\$([\dA-F]{2,4})', store=True),
-    dict(type='T_HEX_NUMBER', regex=r'\#\$([\dA-F]{2})', store=True),
-    dict(type='T_BINARY_NUMBER', regex=r'\#?%([01]{8})', store=True),
-    dict(type='T_DECIMAL_NUMBER', regex=r'\#(\d{1,3})', store=True),
-    dict(type='T_LABEL', regex=r'^([a-zA-Z]{2}[a-zA-Z\d]*)\:', store=True),
-    dict(type='T_MARKER', regex=r'^[a-zA-Z]{2}[a-zA-Z\d]*', store=True),
-    dict(type='T_STRING', regex=r'^"[^"]*"', store=True),
-    dict(type='T_SEPARATOR', regex=r'^,', store=True),
+    dict(type='T_ADDRESS', regex=r'^(\$([\dA-F]{2,4}))', store=True),
+    dict(type='T_HEX_NUMBER', regex=r'^(\#\$([\dA-F]{2}))', store=True),
+    dict(type='T_BINARY_NUMBER', regex=r'^(\#?%([01]{8}))', store=True),
+    dict(type='T_DECIMAL_NUMBER', regex=r'^(\#(\d{1,3}))', store=True),
+    dict(type='T_LABEL', regex=r'^(([a-zA-Z]{2}[a-zA-Z\d]*)\:)', store=True),
+    dict(type='T_MARKER', regex=r'^([a-zA-Z]{2}[a-zA-Z\d]*)', store=True),
+    dict(type='T_STRING', regex=r'^("[^"]*")', store=True),
+    dict(type='T_SEPARATOR', regex=r'^(,)', store=True),
     dict(type='T_ACCUMULATOR', regex=r'^(A|a)', store=True),
     dict(type='T_REGISTER', regex=r'^(X|x|Y|y)', store=True),
     dict(type='T_MODIFIER', regex=r'^(#LOW|#HIGH)', store=True),
-    dict(type='T_OPEN', regex=r'^\(', store=True),
-    dict(type='T_CLOSE', regex=r'^\)', store=True),
-    dict(type='T_OPEN_SQUARE_BRACKETS', regex=r'^\[', store=True),
-    dict(type='T_CLOSE_SQUARE_BRACKETS', regex=r'^\]', store=True),
-    dict(type='T_DIRECTIVE', regex=r'^\.[a-z]+', store=True),
-    dict(type='T_DECIMAL_ARGUMENT', regex=r'^[\d]+', store=True),
-    dict(type='T_ENDLINE', regex=r'^\n', store=True),
-    dict(type='T_WHITESPACE', regex=r'^[ \t\r]+', store=False),
-    dict(type='T_COMMENT', regex=r'^;[^\n]*', store=False)
+    dict(type='T_OPEN', regex=r'^(\()', store=True),
+    dict(type='T_CLOSE', regex=r'^(\))', store=True),
+    dict(type='T_OPEN_SQUARE_BRACKETS', regex=r'^(\[)', store=True),
+    dict(type='T_CLOSE_SQUARE_BRACKETS', regex=r'^(\])', store=True),
+    dict(type='T_DIRECTIVE', regex=r'^(\.[a-z]+)', store=True),
+    dict(type='T_DECIMAL_ARGUMENT', regex=r'^([\d]+)', store=True),
+    dict(type='T_ENDLINE', regex=r'^(\n)', store=True),
+    dict(type='T_WHITESPACE', regex=r'^([ \t\r]+)', store=False),
+    dict(type='T_COMMENT', regex=r'^(;[^\n]*)', store=False)
 ]
 
 
@@ -231,19 +232,19 @@ def lexical(code):
 def get_value(token, labels=None):
     if token['type'] == 'T_ADDRESS':
         m = match(asm65_tokens[1]['regex'], token['value'])
-        return int(m.group(1), 16)
+        return int(m.group(2), 16)
     elif token['type'] == 'T_HEX_NUMBER':
         m = match(asm65_tokens[2]['regex'], token['value'])
-        return int(m.group(1), 16)
+        return int(m.group(2), 16)
     elif token['type'] == 'T_BINARY_NUMBER':
         m = match(asm65_tokens[3]['regex'], token['value'])
-        return int(m.group(1), 2)
+        return int(m.group(2), 2)
     elif token['type'] == 'T_DECIMAL_NUMBER':
         m = match(asm65_tokens[4]['regex'], token['value'])
-        return int(m.group(1), 10)
+        return int(m.group(2), 10)
     elif token['type'] == 'T_LABEL':
         m = match(asm65_tokens[5]['regex'], token['value'])
-        return m.group(1)
+        return m.group(2)
     elif token['type'] == 'T_MARKER' and token['value'] in labels:
         return labels[token['value']]
     elif token['type'] == 'T_DECIMAL_ARGUMENT':
@@ -355,13 +356,13 @@ def semantic(ast, iNES=False, cart=None):
                 raise Exception('UNKNOW DIRECTIVE')
         else:
             if leaf['type'] in ['S_IMPLIED', 'S_ACCUMULATOR']:
-                instruction = leaf['children'][0]['value']
+                instruction = leaf['children'][0]['value'].upper()
                 address = False
             elif leaf['type'] == 'S_RELATIVE':
-                instruction = leaf['children'][0]['value']
+                instruction = leaf['children'][0]['value'].upper()
                 address = get_value(leaf['children'][1], labels)
             elif leaf['type'] == 'S_IMMEDIATE_WITH_MODIFIER':
-                instruction = leaf['children'][0]['value']
+                instruction = leaf['children'][0]['value'].upper()
                 modifier = leaf['children'][1]['value']
                 address = get_value(leaf['children'][3], labels)
                 if modifier == '#LOW':
@@ -372,10 +373,10 @@ def semantic(ast, iNES=False, cart=None):
                                   'S_ABSOLUTE', 'S_ZEROPAGE_X',
                                   'S_ZEROPAGE_Y', 'S_ABSOLUTE_X',
                                   'S_ABSOLUTE_Y']:
-                instruction = leaf['children'][0]['value']
+                instruction = leaf['children'][0]['value'].upper()
                 address = get_value(leaf['children'][1], labels)
             elif leaf['type'] in ['S_INDIRECT_X', 'S_INDIRECT_Y']:
-                instruction = leaf['children'][0]['value']
+                instruction = leaf['children'][0]['value'].upper()
                 address = get_value(leaf['children'][2], labels)
 
             address_mode = address_mode_def[leaf['type']]['short']
