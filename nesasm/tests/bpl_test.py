@@ -9,10 +9,10 @@ if N == 0.
 
 import unittest
 from nesasm.tests import MetaInstructionCase
+from six import add_metaclass
 
-
+@add_metaclass(MetaInstructionCase)
 class BplRelTest(unittest.TestCase):
-    __metaclass__ = MetaInstructionCase
 
     asm = 'BPL $10'
     lex = [('T_INSTRUCTION', 'BPL'), ('T_ADDRESS', '$10')]

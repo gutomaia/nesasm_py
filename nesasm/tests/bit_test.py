@@ -2,10 +2,11 @@
 
 import unittest
 from nesasm.tests import MetaInstructionCase
+from six import add_metaclass
 
 
+@add_metaclass(MetaInstructionCase)
 class BitZpTest(unittest.TestCase):
-    __metaclass__ = MetaInstructionCase
 
     asm = 'BIT $00'
     lex = [('T_INSTRUCTION', 'BIT'), ('T_ADDRESS', '$00')]
@@ -13,8 +14,8 @@ class BitZpTest(unittest.TestCase):
     code = [0x24, 0x00]
 
 
+@add_metaclass(MetaInstructionCase)
 class BitAbsTest(unittest.TestCase):
-    __metaclass__ = MetaInstructionCase
 
     asm = 'BIT $1234'
     lex = [('T_INSTRUCTION', 'BIT'), ('T_ADDRESS', '$1234')]

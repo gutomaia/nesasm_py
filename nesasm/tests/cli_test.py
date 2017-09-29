@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 import unittest
 from nesasm.tests import MetaInstructionCase
+from six import add_metaclass
 
 
+@add_metaclass(MetaInstructionCase)
 class CliImplTest(unittest.TestCase):
-    __metaclass__ = MetaInstructionCase
 
     asm = 'CLI'
     lex = [('T_INSTRUCTION', 'CLI')]

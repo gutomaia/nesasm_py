@@ -3,10 +3,11 @@
 import unittest
 
 from nesasm.tests import MetaInstructionCase
+from six import add_metaclass
 
 
+@add_metaclass(MetaInstructionCase)
 class TsxSnglTest(unittest.TestCase):
-    __metaclass__ = MetaInstructionCase
     asm = 'TSX'
     lex = [('T_INSTRUCTION', 'TSX')]
     syn = ['S_IMPLIED']

@@ -9,10 +9,10 @@ if V == 1.
 
 import unittest
 from nesasm.tests import MetaInstructionCase
+from six import add_metaclass
 
-
+@add_metaclass(MetaInstructionCase)
 class BvsRelTest(unittest.TestCase):
-    __metaclass__ = MetaInstructionCase
 
     asm = 'BVS $10'
     lex = [('T_INSTRUCTION', 'BVS'), ('T_ADDRESS', '$10')]

@@ -3,10 +3,11 @@
 import unittest
 
 from nesasm.tests import MetaInstructionCase
+from six import add_metaclass
 
 
+@add_metaclass(MetaInstructionCase)
 class SeiSnglTest(unittest.TestCase):
-    __metaclass__ = MetaInstructionCase
     asm = 'SEI'
     lex = [('T_INSTRUCTION', 'SEI')]
     syn = ['S_IMPLIED']
