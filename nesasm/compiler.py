@@ -203,7 +203,7 @@ asm65_bnf = [
     dict(type='S_RS', bnf=[t_marker, t_directive, t_directive_argument]),
     dict(type='S_DIRECTIVE', bnf=[t_directive, t_directive_argument]),
     dict(type='S_RELATIVE', bnf=[t_relative, t_address_or_t_marker]),
-    dict(type='S_CONSTANT', bnf=[t_marker, t_equal, t_address_or_t_number]),
+    dict(type='S_CONSTANT', bnf=[t_marker, t_equal, t_address]),
     dict(type='S_IMMEDIATE', bnf=[t_instruction, t_number]),
     dict(type='S_IMMEDIATE_WITH_MODIFIER',
          bnf=[t_instruction, t_modifier, t_open, t_address_or_t_marker,

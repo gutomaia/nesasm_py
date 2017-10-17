@@ -9,61 +9,16 @@ from six import add_metaclass
 
 
 @add_metaclass(MetaInstructionCase)
-class ConstantAdcImmTest(unittest.TestCase):
-    asm = 'FOO = #$10\nADC FOO'
+class ConstantLdaAbs(unittest.TestCase):
+    asm = 'JOYSTICK1 = $4016\nLDA JOYSTICK1'
     lex = [
-        ('T_MARKER', 'FOO'),
+        ('T_MARKER', 'JOYSTICK1'),
         ('T_EQUAL', '='),
-        ('T_HEX_NUMBER', '#$10'),
+        ('T_ADDRESS', '$4016'),
         ('T_ENDLINE', '\n'),
-        ('T_INSTRUCTION', 'ADC'),
-        ('T_MARKER', 'FOO'),
+        ('T_INSTRUCTION', 'LDA'),
+        ('T_MARKER', 'JOYSTICK1'),
     ]
 
-    syn = ['S_CONSTANT', 'S_IMMEDIATE']
-    code = [0x69, 0x10]
-
-
-@add_metaclass(MetaInstructionCase)
-class ConstantAdcImmWithDecimalTest(unittest.TestCase):
-    asm = 'FOO = #10\nADC FOO'
-    lex = [
-        ('T_MARKER', 'FOO'),
-        ('T_EQUAL', '='),
-        ('T_DECIMAL_NUMBER', '#10'),
-        ('T_ENDLINE', '\n'),
-        ('T_INSTRUCTION', 'ADC'),
-        ('T_MARKER', 'FOO'),
-    ]
-    syn = ['S_CONSTANT', 'S_IMMEDIATE']
-    code = [0x69, 0x0A]
-
-
-@add_metaclass(MetaInstructionCase)
-class ConstantAdcImmWithBinaryTest(unittest.TestCase):
-    asm = 'FOO = #%00000100\nADC FOO'
-    lex = [
-        ('T_MARKER', 'FOO'),
-        ('T_EQUAL', '='),
-        ('T_BINARY_NUMBER', '#%00000100'),
-        ('T_ENDLINE', '\n'),
-        ('T_INSTRUCTION', 'ADC'),
-        ('T_MARKER', 'FOO'),
-    ]
-    syn = ['S_CONSTANT', 'S_IMMEDIATE']
-    code = [0x69, 0x04]
-
-
-@add_metaclass(MetaInstructionCase)
-class ConstantAdcZpTest(unittest.TestCase):
-    asm = 'FOO = $00\nADC FOO'
-    lex = [
-        ('T_MARKER', 'FOO'),
-        ('T_EQUAL', '='),
-        ('T_ADDRESS', '$00'),
-        ('T_ENDLINE', '\n'),
-        ('T_INSTRUCTION', 'ADC'),
-        ('T_MARKER', 'FOO'),
-    ]
-    syn = ['S_CONSTANT', 'S_ZEROPAGE']
-    code = [0x65, 0x00]
+    syn = ['S_CONSTANT', 'S_ABSOLUTE']
+    code = [0xad, 0x16, 0x40]
