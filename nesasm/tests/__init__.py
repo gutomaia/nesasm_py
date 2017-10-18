@@ -46,7 +46,6 @@ class MetaInstructionCase(type):
                             break
                         tokens.append({'type': l[0], 'value': l[1]})
 
-                    print {'type': self.syn[i], 'children': tokens}
                     ast.append({'type': self.syn[i], 'children': tokens})
 
                 # print ast

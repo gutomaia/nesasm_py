@@ -392,7 +392,6 @@ def semantic(ast, iNES=False, cart=None):
                                   'S_ABSOLUTE_Y']:
                 instruction = leaf['children'][0]['value'].upper()
                 address = get_value(leaf['children'][1], labels, constants)
-                print 'address', address
             elif leaf['type'] in ['S_INDIRECT_X', 'S_INDIRECT_Y']:
                 instruction = leaf['children'][0]['value'].upper()
                 address = get_value(leaf['children'][2], labels, constants)
