@@ -6,11 +6,9 @@ This is an arithmetic instruction of the 6502.
 
 import unittest
 from nesasm.tests import MetaInstructionCase
-from six import add_metaclass
 
 
-@add_metaclass(MetaInstructionCase)
-class AdcImmTest(unittest.TestCase):
+class AdcImmTest(unittest.TestCase, metaclass=MetaInstructionCase):
     '''
     Test the arithmetic operation ADC between decimal 16
     and the content of the accumulator.
@@ -21,8 +19,7 @@ class AdcImmTest(unittest.TestCase):
     code = [0x69, 0x10]
 
 
-@add_metaclass(MetaInstructionCase)
-class AdcImmWithDecimalTest(unittest.TestCase):
+class AdcImmWithDecimalTest(unittest.TestCase, metaclass=MetaInstructionCase):
     '''
     Test the arithmetic operation ADC between decimal 10
     and the content of the accumulator.
@@ -33,8 +30,7 @@ class AdcImmWithDecimalTest(unittest.TestCase):
     code = [0x69, 0x0A]
 
 
-@add_metaclass(MetaInstructionCase)
-class AdcImmWithBinaryTest(unittest.TestCase):
+class AdcImmWithBinaryTest(unittest.TestCase, metaclass=MetaInstructionCase):
     '''
     Test the arithmetic operation ADC between binary %00000100
     (Decimal 4) and the content of the accumulator.
@@ -45,8 +41,7 @@ class AdcImmWithBinaryTest(unittest.TestCase):
     code = [0x69, 0x04]
 
 
-@add_metaclass(MetaInstructionCase)
-class AdcZpTest(unittest.TestCase):
+class AdcZpTest(unittest.TestCase, metaclass=MetaInstructionCase):
     '''
     Test the arithmetic operation ADC between the content of
     the accumulator and the content of the zero page address.
@@ -57,8 +52,7 @@ class AdcZpTest(unittest.TestCase):
     code = [0x65, 0x00]
 
 
-@add_metaclass(MetaInstructionCase)
-class AdcZpxTest(unittest.TestCase):
+class AdcZpxTest(unittest.TestCase, metaclass=MetaInstructionCase):
     '''
     Test the arithmetic operation ADC between the content of the
     accumulator and the content of the zero page with address
@@ -71,8 +65,7 @@ class AdcZpxTest(unittest.TestCase):
     code = [0x75, 0x10]
 
 
-@add_metaclass(MetaInstructionCase)
-class AdcAbsTest(unittest.TestCase):
+class AdcAbsTest(unittest.TestCase, metaclass=MetaInstructionCase):
     '''
     Test the arithmetic operation ADC between the content of
     the accumulator and the content located at address $1234.
@@ -83,8 +76,7 @@ class AdcAbsTest(unittest.TestCase):
     code = [0x6d, 0x34, 0x12]
 
 
-@add_metaclass(MetaInstructionCase)
-class AdcAbsx(unittest.TestCase):
+class AdcAbsx(unittest.TestCase, metaclass=MetaInstructionCase):
     '''
     Test the arithmetic operation ADC between the content of the
     accumulator and the content located at address $1234
@@ -97,8 +89,7 @@ class AdcAbsx(unittest.TestCase):
     code = [0x7d, 0x34, 0x12]
 
 
-@add_metaclass(MetaInstructionCase)
-class AdcAbsy(unittest.TestCase):
+class AdcAbsy(unittest.TestCase, metaclass=MetaInstructionCase):
     '''
     Test the arithmetic operation ADC between the content of the
     accumulator and the content located at address $1234
@@ -111,8 +102,7 @@ class AdcAbsy(unittest.TestCase):
     code = [0x79, 0x34, 0x12]
 
 
-@add_metaclass(MetaInstructionCase)
-class AdcIndx(unittest.TestCase):
+class AdcIndx(unittest.TestCase, metaclass=MetaInstructionCase):
     '''
     Test the arithmetic ADC operation between the content of the
     accumulator and the content located at the address
@@ -127,8 +117,7 @@ class AdcIndx(unittest.TestCase):
     code = [0x61, 0x20]
 
 
-@add_metaclass(MetaInstructionCase)
-class AdcIndy(unittest.TestCase):
+class AdcIndy(unittest.TestCase, metaclass=MetaInstructionCase):
     '''
     Test arithmetic operation ADC between the content of the
     accumulator and the content located at the address

@@ -1,11 +1,9 @@
 import unittest
 
 from nesasm.tests import MetaInstructionCase
-from six import add_metaclass
 
 
-@add_metaclass(MetaInstructionCase)
-class SedSnglTest(unittest.TestCase):
+class SedSnglTest(unittest.TestCase, metaclass=MetaInstructionCase):
     asm = 'SED'
     lex = [('T_INSTRUCTION', 'SED')]
     syn = ['S_IMPLIED']

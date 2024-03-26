@@ -4,11 +4,9 @@ CMP, Compare with Accumulator Test
 
 import unittest
 from nesasm.tests import MetaInstructionCase
-from six import add_metaclass
 
 
-@add_metaclass(MetaInstructionCase)
-class CpmImmTest(unittest.TestCase):
+class CpmImmTest(unittest.TestCase, metaclass=MetaInstructionCase):
 
     asm = 'CMP #$10'
     lex = [('T_INSTRUCTION', 'CMP'), ('T_HEX_NUMBER', '#$10')]
@@ -16,8 +14,7 @@ class CpmImmTest(unittest.TestCase):
     code = [0xc9, 0x10]
 
 
-@add_metaclass(MetaInstructionCase)
-class CpmImmDecimalTest(unittest.TestCase):
+class CpmImmDecimalTest(unittest.TestCase, metaclass=MetaInstructionCase):
 
     asm = 'CMP #10'
     lex = [('T_INSTRUCTION', 'CMP'), ('T_DECIMAL_NUMBER', '#10')]
@@ -25,8 +22,7 @@ class CpmImmDecimalTest(unittest.TestCase):
     code = [0xc9, 0x0a]
 
 
-@add_metaclass(MetaInstructionCase)
-class CpmImmBinaryTest(unittest.TestCase):
+class CpmImmBinaryTest(unittest.TestCase, metaclass=MetaInstructionCase):
 
     asm = 'CMP #%00000100'
     lex = [('T_INSTRUCTION', 'CMP'), ('T_BINARY_NUMBER', '#%00000100')]
@@ -34,8 +30,7 @@ class CpmImmBinaryTest(unittest.TestCase):
     code = [0xc9, 0x04]
 
 
-@add_metaclass(MetaInstructionCase)
-class CpmZpTest(unittest.TestCase):
+class CpmZpTest(unittest.TestCase, metaclass=MetaInstructionCase):
 
     asm = 'CMP $00'
     lex = [('T_INSTRUCTION', 'CMP'), ('T_ADDRESS', '$00')]
@@ -43,8 +38,7 @@ class CpmZpTest(unittest.TestCase):
     code = [0xc5, 0x00]
 
 
-@add_metaclass(MetaInstructionCase)
-class CpmZpxTest(unittest.TestCase):
+class CpmZpxTest(unittest.TestCase, metaclass=MetaInstructionCase):
 
     asm = 'CMP $10,X'
     lex = [('T_INSTRUCTION', 'CMP'), ('T_ADDRESS', '$10'),
@@ -53,8 +47,7 @@ class CpmZpxTest(unittest.TestCase):
     code = [0xd5, 0x10]
 
 
-@add_metaclass(MetaInstructionCase)
-class CpmAbsTest(unittest.TestCase):
+class CpmAbsTest(unittest.TestCase, metaclass=MetaInstructionCase):
 
     asm = 'CMP $1234'
     lex = [('T_INSTRUCTION', 'CMP'), ('T_ADDRESS', '$1234')]
@@ -62,8 +55,7 @@ class CpmAbsTest(unittest.TestCase):
     code = [0xcd, 0x34, 0x12]
 
 
-@add_metaclass(MetaInstructionCase)
-class CpmAbsxTest(unittest.TestCase):
+class CpmAbsxTest(unittest.TestCase, metaclass=MetaInstructionCase):
 
     asm = 'CMP $1234, X'
     lex = [('T_INSTRUCTION', 'CMP'), ('T_ADDRESS', '$1234'),
@@ -72,8 +64,7 @@ class CpmAbsxTest(unittest.TestCase):
     code = [0xdd, 0x34, 0x12]
 
 
-@add_metaclass(MetaInstructionCase)
-class CpmAbsyTest(unittest.TestCase):
+class CpmAbsyTest(unittest.TestCase, metaclass=MetaInstructionCase):
 
     asm = 'CMP $1234, Y'
     lex = [('T_INSTRUCTION', 'CMP'), ('T_ADDRESS', '$1234'),
@@ -82,8 +73,7 @@ class CpmAbsyTest(unittest.TestCase):
     code = [0xd9, 0x34, 0x12]
 
 
-@add_metaclass(MetaInstructionCase)
-class CpmIndxTest(unittest.TestCase):
+class CpmIndxTest(unittest.TestCase, metaclass=MetaInstructionCase):
 
     asm = 'CMP ($20, X)'
     lex = [('T_INSTRUCTION', 'CMP'), ('T_OPEN', '('), ('T_ADDRESS', '$20'),
@@ -92,8 +82,7 @@ class CpmIndxTest(unittest.TestCase):
     code = [0xc1, 0x20]
 
 
-@add_metaclass(MetaInstructionCase)
-class CpmIndyTest(unittest.TestCase):
+class CpmIndyTest(unittest.TestCase, metaclass=MetaInstructionCase):
 
     asm = 'CMP ($20),Y'
     lex = [('T_INSTRUCTION', 'CMP'), ('T_OPEN', '('), ('T_ADDRESS', '$20'),

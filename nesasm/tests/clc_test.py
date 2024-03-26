@@ -7,11 +7,9 @@ This is a test for the clear carry instruction
 
 import unittest
 from nesasm.tests import MetaInstructionCase
-from six import add_metaclass
 
 
-@add_metaclass(MetaInstructionCase)
-class ClsImplTest(unittest.TestCase):
+class ClsImplTest(unittest.TestCase, metaclass=MetaInstructionCase):
 
     asm = 'CLC'
     lex = [('T_INSTRUCTION', 'CLC')]

@@ -1,11 +1,9 @@
 import unittest
 
 from nesasm.tests import MetaInstructionCase
-from six import add_metaclass
 
 
-@add_metaclass(MetaInstructionCase)
-class PlpSnglTest(unittest.TestCase):
+class PlpSnglTest(unittest.TestCase, metaclass=MetaInstructionCase):
     asm = 'PLP'
     lex = [('T_INSTRUCTION', 'PLP')]
     syn = ['S_IMPLIED']

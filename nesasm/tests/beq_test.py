@@ -8,10 +8,8 @@ if Z == 1.
 
 import unittest
 from nesasm.tests import MetaInstructionCase
-from six import add_metaclass
 
-@add_metaclass(MetaInstructionCase)
-class BeqRelTest(unittest.TestCase):
+class BeqRelTest(unittest.TestCase, metaclass=MetaInstructionCase):
 
     asm = 'BEQ $10'
     lex = [('T_INSTRUCTION', 'BEQ'), ('T_ADDRESS', '$10')]

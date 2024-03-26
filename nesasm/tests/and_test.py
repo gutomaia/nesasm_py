@@ -8,10 +8,8 @@ a content at a specific location.
 '''
 import unittest
 from nesasm.tests import MetaInstructionCase
-from six import add_metaclass
 
-@add_metaclass(MetaInstructionCase)
-class AndImmTest(unittest.TestCase):
+class AndImmTest(unittest.TestCase, metaclass=MetaInstructionCase):
     '''
     Test the logical operation AND between $10(Decimal 16)
     and the content of the Accumulator
@@ -22,8 +20,7 @@ class AndImmTest(unittest.TestCase):
     code = [0x29, 0x10]
 
 
-@add_metaclass(MetaInstructionCase)
-class AndImmWithDecimal(unittest.TestCase):
+class AndImmWithDecimal(unittest.TestCase, metaclass=MetaInstructionCase):
     '''
     Test the logical operation AND between #10(Decimal 10)
     and the content of the Accumulator
@@ -35,8 +32,7 @@ class AndImmWithDecimal(unittest.TestCase):
     code = [0x29, 0x0a]
 
 
-@add_metaclass(MetaInstructionCase)
-class AndImmWithBinary(unittest.TestCase):
+class AndImmWithBinary(unittest.TestCase, metaclass=MetaInstructionCase):
     '''
     Test the logical operation AND between #%00000100 (Decimal 4)
     and the content of the Accumulator
@@ -48,8 +44,7 @@ class AndImmWithBinary(unittest.TestCase):
     code = [0x29, 0x04]
 
 
-@add_metaclass(MetaInstructionCase)
-class AndZp(unittest.TestCase):
+class AndZp(unittest.TestCase, metaclass=MetaInstructionCase):
     '''
     Test the logical operation AND between the content of
     accumulator and the content of zero page address $00
@@ -61,8 +56,7 @@ class AndZp(unittest.TestCase):
     code = [0x25, 0x00]
 
 
-@add_metaclass(MetaInstructionCase)
-class AndZpx(unittest.TestCase):
+class AndZpx(unittest.TestCase, metaclass=MetaInstructionCase):
     '''
     Test the logical operation AND between the content of
     accumulator and the content located at zero page with
@@ -76,16 +70,14 @@ class AndZpx(unittest.TestCase):
     code = [0x35, 0x10]
 
 
-@add_metaclass(MetaInstructionCase)
-class AndAbs(unittest.TestCase):
+class AndAbs(unittest.TestCase, metaclass=MetaInstructionCase):
     asm = 'AND $1234'
     lex = [('T_INSTRUCTION', 'AND'), ('T_ADDRESS', '$1234')]
     syn = ['S_ABSOLUTE']
     code = [0x2d, 0x34, 0x12]
 
 
-@add_metaclass(MetaInstructionCase)
-class AndAbsx(unittest.TestCase):
+class AndAbsx(unittest.TestCase, metaclass=MetaInstructionCase):
     asm = 'AND $1234,X'
     lex = [('T_INSTRUCTION', 'AND'), ('T_ADDRESS', '$1234'),
            ('T_SEPARATOR', ','), ('T_REGISTER', 'X')]
@@ -93,8 +85,7 @@ class AndAbsx(unittest.TestCase):
     code = [0x3d, 0x34, 0x12]
 
 
-@add_metaclass(MetaInstructionCase)
-class AndAbsy(unittest.TestCase):
+class AndAbsy(unittest.TestCase, metaclass=MetaInstructionCase):
     asm = 'AND $1234,Y'
     lex = [('T_INSTRUCTION', 'AND'), ('T_ADDRESS', '$1234'),
            ('T_SEPARATOR', ','), ('T_REGISTER', 'Y')]
@@ -102,8 +93,7 @@ class AndAbsy(unittest.TestCase):
     code = [0x39, 0x34, 0x12]
 
 
-@add_metaclass(MetaInstructionCase)
-class AndIndx(unittest.TestCase):
+class AndIndx(unittest.TestCase, metaclass=MetaInstructionCase):
     asm = 'AND ($20,X)'
     lex = [('T_INSTRUCTION', 'AND'), ('T_OPEN', '('),
            ('T_ADDRESS', '$20'), ('T_SEPARATOR', ','),
@@ -112,8 +102,7 @@ class AndIndx(unittest.TestCase):
     code = [0x21, 0x20]
 
 
-@add_metaclass(MetaInstructionCase)
-class AndIndy(unittest.TestCase):
+class AndIndy(unittest.TestCase, metaclass=MetaInstructionCase):
     asm = 'AND ($20),Y'
     lex = [('T_INSTRUCTION', 'AND'), ('T_OPEN', '('),
            ('T_ADDRESS', '$20'), ('T_CLOSE', ')'),

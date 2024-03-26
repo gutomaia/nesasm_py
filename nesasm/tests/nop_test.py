@@ -1,11 +1,9 @@
 import unittest
 
 from nesasm.tests import MetaInstructionCase
-from six import add_metaclass
 
 
-@add_metaclass(MetaInstructionCase)
-class NopSnglTest(unittest.TestCase):
+class NopSnglTest(unittest.TestCase, metaclass=MetaInstructionCase):
     asm = 'NOP'
     lex = [('T_INSTRUCTION', 'NOP')]
     syn = ['S_IMPLIED']

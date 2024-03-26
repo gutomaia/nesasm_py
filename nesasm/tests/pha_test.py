@@ -1,11 +1,9 @@
 import unittest
 
 from nesasm.tests import MetaInstructionCase
-from six import add_metaclass
 
 
-@add_metaclass(MetaInstructionCase)
-class PhaSnglTest(unittest.TestCase):
+class PhaSnglTest(unittest.TestCase, metaclass=MetaInstructionCase):
     asm = 'PHA'
     lex = [('T_INSTRUCTION', 'PHA')]
     syn = ['S_IMPLIED']

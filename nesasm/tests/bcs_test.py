@@ -8,10 +8,8 @@ if C == 0.
 
 import unittest
 from nesasm.tests import MetaInstructionCase
-from six import add_metaclass
 
-@add_metaclass(MetaInstructionCase)
-class BcsRelTest(unittest.TestCase):
+class BcsRelTest(unittest.TestCase, metaclass=MetaInstructionCase):
 
     asm = 'BCS $10'
     lex = [('T_INSTRUCTION', 'BCS'), ('T_ADDRESS', '$10')]

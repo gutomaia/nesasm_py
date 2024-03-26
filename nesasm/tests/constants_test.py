@@ -4,11 +4,9 @@ from nesasm.compiler import lexical, syntax, semantic
 
 import unittest
 from nesasm.tests import MetaInstructionCase
-from six import add_metaclass
 
 
-@add_metaclass(MetaInstructionCase)
-class ConstantLdaAbs(unittest.TestCase):
+class ConstantLdaAbs(unittest.TestCase, metaclass=MetaInstructionCase):
     asm = 'JOYSTICK1 = $4016\nLDA JOYSTICK1'
     lex = [
         ('T_MARKER', 'JOYSTICK1'),

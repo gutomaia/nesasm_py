@@ -8,10 +8,8 @@ if N == 1.
 
 import unittest
 from nesasm.tests import MetaInstructionCase
-from six import add_metaclass
 
-@add_metaclass(MetaInstructionCase)
-class BmiRelTest(unittest.TestCase):
+class BmiRelTest(unittest.TestCase, metaclass=MetaInstructionCase):
 
     asm = 'BMI $10'
     lex = [('T_INSTRUCTION', 'BMI'), ('T_ADDRESS', '$10')]

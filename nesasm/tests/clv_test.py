@@ -1,10 +1,8 @@
 import unittest
 from nesasm.tests import MetaInstructionCase
-from six import add_metaclass
 
 
-@add_metaclass(MetaInstructionCase)
-class ClvImplTest(unittest.TestCase):
+class ClvImplTest(unittest.TestCase, metaclass=MetaInstructionCase):
 
     asm = 'CLV'
     lex = [('T_INSTRUCTION', 'CLV')]
