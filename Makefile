@@ -44,7 +44,7 @@ purge: python_purge
 build: python_build
 
 test: python_build ${REQUIREMENTS_TEST} ${CHECKPOINT_DIR}/.python_develop
-	${VIRTUALENV} nosetests --processes=2
+	${VIRTUALENV} pytest
 
 ${NESASM_C_MAKE}:
 	mkdir -p tools
