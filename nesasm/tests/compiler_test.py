@@ -38,15 +38,15 @@ class CompilerTest(unittest.TestCase):
             LDA $20     ;get the low byte of the first number
             '''
         tokens = list(lexical(code))
-        self.assertEquals(6, len(tokens))
-        self.assertEquals('T_ENDLINE', tokens[0]['type'])
-        self.assertEquals('T_INSTRUCTION', tokens[1]['type'])
-        self.assertEquals('T_ENDLINE', tokens[2]['type'])
-        self.assertEquals('T_INSTRUCTION', tokens[3]['type'])
-        self.assertEquals('T_ADDRESS', tokens[4]['type'])
-        self.assertEquals('T_ENDLINE', tokens[5]['type'])
+        self.assertEqual(6, len(tokens))
+        self.assertEqual('T_ENDLINE', tokens[0]['type'])
+        self.assertEqual('T_INSTRUCTION', tokens[1]['type'])
+        self.assertEqual('T_ENDLINE', tokens[2]['type'])
+        self.assertEqual('T_INSTRUCTION', tokens[3]['type'])
+        self.assertEqual('T_ADDRESS', tokens[4]['type'])
+        self.assertEqual('T_ENDLINE', tokens[5]['type'])
         ast = syntax(tokens)
-        self.assertEquals(2, len(ast))
+        self.assertEqual(2, len(ast))
 
     def test_compile_decimal(self):
         code = '''
@@ -54,14 +54,14 @@ class CompilerTest(unittest.TestCase):
             STA $0203
         '''
         tokens = list(lexical(code))
-        self.assertEquals(7, len(tokens))
-        self.assertEquals('T_ENDLINE', tokens[0]['type'])
-        self.assertEquals('T_INSTRUCTION', tokens[1]['type'])
-        self.assertEquals('T_DECIMAL_NUMBER', tokens[2]['type'])
-        self.assertEquals('T_ENDLINE', tokens[3]['type'])
-        self.assertEquals('T_INSTRUCTION', tokens[4]['type'])
-        self.assertEquals('T_ADDRESS', tokens[5]['type'])
-        self.assertEquals('T_ENDLINE', tokens[6]['type'])
+        self.assertEqual(7, len(tokens))
+        self.assertEqual('T_ENDLINE', tokens[0]['type'])
+        self.assertEqual('T_INSTRUCTION', tokens[1]['type'])
+        self.assertEqual('T_DECIMAL_NUMBER', tokens[2]['type'])
+        self.assertEqual('T_ENDLINE', tokens[3]['type'])
+        self.assertEqual('T_INSTRUCTION', tokens[4]['type'])
+        self.assertEqual('T_ADDRESS', tokens[5]['type'])
+        self.assertEqual('T_ENDLINE', tokens[6]['type'])
 
     def test_compile_list(self):
         code = '''
@@ -71,26 +71,26 @@ class CompilerTest(unittest.TestCase):
         '''
         tokens = list(lexical(code))
         ast = syntax(tokens)
-        self.assertEquals(2, len(ast))
+        self.assertEqual(2, len(ast))
 
-        self.assertEquals('S_DIRECTIVE', ast[0]['type'])
-        self.assertEquals('.db', ast[0]['children'][0]['value'])
-        self.assertEquals(32, len(ast[0]['children']))
+        self.assertEqual('S_DIRECTIVE', ast[0]['type'])
+        self.assertEqual('.db', ast[0]['children'][0]['value'])
+        self.assertEqual(32, len(ast[0]['children']))
         palette1 = [0x0f, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09,
                     0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f]
         for i, p in enumerate(palette1):
             h = '$%02X' % p
-            self.assertEquals(h, ast[0]['children'][i * 2 + 1]['value'])
-            self.assertEquals('S_DIRECTIVE', ast[1]['type'])
+            self.assertEqual(h, ast[0]['children'][i * 2 + 1]['value'])
+            self.assertEqual('S_DIRECTIVE', ast[1]['type'])
 
-        self.assertEquals('S_DIRECTIVE', ast[1]['type'])
-        self.assertEquals('.db', ast[0]['children'][0]['value'])
-        self.assertEquals(32, len(ast[1]['children']))
+        self.assertEqual('S_DIRECTIVE', ast[1]['type'])
+        self.assertEqual('.db', ast[0]['children'][0]['value'])
+        self.assertEqual(32, len(ast[1]['children']))
         palette2 = [0x0f, 0x30, 0x31, 0x32, 0x33, 0x35, 0x36, 0x37, 0x38, 0x39,
                     0x3a, 0x3b, 0x3c, 0x3d, 0x3e, 0x0f]
         for i, p in enumerate(palette2):
             h = '$%02X' % p
-            self.assertEquals(h, ast[1]['children'][i * 2 + 1]['value'])
+            self.assertEqual(h, ast[1]['children'][i * 2 + 1]['value'])
 
     def test_instructions_with_labels(self):
         code = '''
@@ -103,15 +103,15 @@ class CompilerTest(unittest.TestCase):
 
         tokens = list(lexical(code))
         ast = syntax(tokens)
-        self.assertEquals(4, len(ast))
-        self.assertEquals('S_DIRECTIVE', ast[0]['type'])
-        self.assertEquals('S_ABSOLUTE', ast[1]['type'])
-        self.assertEquals(['WAITVBLANK'], ast[1]['labels'])
+        self.assertEqual(4, len(ast))
+        self.assertEqual('S_DIRECTIVE', ast[0]['type'])
+        self.assertEqual('S_ABSOLUTE', ast[1]['type'])
+        self.assertEqual(['WAITVBLANK'], ast[1]['labels'])
 
         labels = get_labels(ast)
         expected = {'WAITVBLANK': 0xc000}
 
-        self.assertEquals(expected, labels)
+        self.assertEqual(expected, labels)
 
     def test_several_lists_with_labels(self):
         code = '''
@@ -127,24 +127,24 @@ class CompilerTest(unittest.TestCase):
 
         tokens = list(lexical(code))
         ast = syntax(tokens)
-        self.assertEquals(4, len(ast))
-        self.assertEquals('S_DIRECTIVE', ast[0]['type'])
-        self.assertEquals('.org', ast[0]['children'][0]['value'])
-        self.assertEquals('S_DIRECTIVE', ast[1]['type'])
-        self.assertEquals('.db', ast[1]['children'][0]['value'])
-        self.assertEquals(['palette'], ast[1]['labels'])
+        self.assertEqual(4, len(ast))
+        self.assertEqual('S_DIRECTIVE', ast[0]['type'])
+        self.assertEqual('.org', ast[0]['children'][0]['value'])
+        self.assertEqual('S_DIRECTIVE', ast[1]['type'])
+        self.assertEqual('.db', ast[1]['children'][0]['value'])
+        self.assertEqual(['palette'], ast[1]['labels'])
 
-        self.assertEquals('S_DIRECTIVE', ast[2]['type'])
-        self.assertEquals('.db', ast[2]['children'][0]['value'])
+        self.assertEqual('S_DIRECTIVE', ast[2]['type'])
+        self.assertEqual('.db', ast[2]['children'][0]['value'])
 
-        self.assertEquals('S_DIRECTIVE', ast[3]['type'])
-        self.assertEquals('.db', ast[3]['children'][0]['value'])
-        self.assertEquals(['sprites'], ast[3]['labels'])
+        self.assertEqual('S_DIRECTIVE', ast[3]['type'])
+        self.assertEqual('.db', ast[3]['children'][0]['value'])
+        self.assertEqual(['sprites'], ast[3]['labels'])
 
         labels = get_labels(ast)
         expected = {'palette': 0xE000, 'sprites': 0xE000 + 32}
 
-        self.assertEquals(expected, labels)
+        self.assertEqual(expected, labels)
 
     @unittest.skip('TODO:')
     def test_raise_erro_with_unknow_label(self):

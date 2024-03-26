@@ -21,7 +21,7 @@ class LabelTest(TestCase):
         '''
 
         labels = self.get_labels(code)
-        self.assertEquals(labels['WAITVBLANK'], 0)
+        self.assertEqual(labels['WAITVBLANK'], 0)
 
     def test_waitvblank_label_org_at_0x0100(self):
         code = '''
@@ -33,7 +33,7 @@ class LabelTest(TestCase):
         '''
 
         labels = self.get_labels(code)
-        self.assertEquals(labels['WAITVBLANK'], 256)
+        self.assertEqual(labels['WAITVBLANK'], 256)
 
     def test_waitvblank_label_cartridge_at_0x0100(self):
         code = '''
@@ -44,4 +44,4 @@ class LabelTest(TestCase):
         '''
 
         labels = self.get_labels(code, 0x0100)
-        self.assertEquals(labels['WAITVBLANK'], 256)
+        self.assertEqual(labels['WAITVBLANK'], 256)

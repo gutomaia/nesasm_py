@@ -20,8 +20,8 @@ class AnalyzerTest(TestCase):
     def test_raise_unknown_token(self):
         tokens = analyse('ONE *unknown', asm_test_tokens)
         self.assertIsInstance(tokens, GeneratorType)
-        self.assertEquals('T_FAKE_INSTRUCTION', next(tokens)['type'])
-        self.assertEquals('T_SOME_SYMBOL', next(tokens)['type'])
+        self.assertEqual('T_FAKE_INSTRUCTION', next(tokens)['type'])
+        self.assertEqual('T_SOME_SYMBOL', next(tokens)['type'])
         with self.assertRaises(UnknownToken):
             next(tokens)  # unknown
 
@@ -35,10 +35,10 @@ class AnalyzerTest(TestCase):
             list(tokens)
 
         ut = r.exception
-        self.assertEquals(2, ut.line)
-        self.assertEquals(3, ut.column)
-        self.assertEquals('  @--Case \n', ut.line_code)  # W/ trail wspaces
-        self.assertEquals('Unknown token @(2,3):   @--Case', ut.message)
+        self.assertEqual(2, ut.line)
+        self.assertEqual(3, ut.column)
+        self.assertEqual('  @--Case \n', ut.line_code)  # W/ trail wspaces
+        self.assertEqual('Unknown token @(2,3):   @--Case', ut.message)
 
     @skip('TODO')
     def test_empty_token_types_list(self):

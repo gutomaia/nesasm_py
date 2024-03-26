@@ -14,10 +14,10 @@ class MetaInstructionCase(type):
         def gen_lex():
             def test(self):
                 tokens = list(lexical(self.asm))
-                self.assertEquals(len(tokens), len(self.lex))
+                self.assertEqual(len(tokens), len(self.lex))
                 for i, l in enumerate(self.lex):
-                    self.assertEquals(l[0], tokens[i]['type'])
-                    self.assertEquals(l[1], tokens[i]['value'])
+                    self.assertEqual(l[0], tokens[i]['type'])
+                    self.assertEqual(l[1], tokens[i]['value'])
             return test
 
         def gen_syn():
@@ -28,9 +28,9 @@ class MetaInstructionCase(type):
                 ]
 
                 ast = syntax(tokens)
-                self.assertEquals(len(ast), len(self.syn))
+                self.assertEqual(len(ast), len(self.syn))
                 for i, a in enumerate(self.syn):
-                    self.assertEquals(ast[i]['type'], self.syn[i])
+                    self.assertEqual(ast[i]['type'], self.syn[i])
             return test
 
         def gen_sem():
@@ -50,7 +50,7 @@ class MetaInstructionCase(type):
 
                 # print ast
                 compiled = semantic(ast)
-                self.assertEquals(compiled, self.code)
+                self.assertEqual(compiled, self.code)
             return test
 
         s1 = re.sub('(.)([A-Z][a-z]+)', r'\1_\2', name)
@@ -85,7 +85,7 @@ class HexTestCase(TestCase):
         FAIL = '\033[91m'
         ENDC = '\033[0m'
         try:
-            self.assertEquals(expected, actual)
+            self.assertEqual(expected, actual)
         except AssertionError:
             line = 0
             cursor = 0

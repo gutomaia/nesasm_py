@@ -21,9 +21,9 @@ class GuideTest(unittest.TestCase):
             STA $25     ;store in high byte of the result
             '''
         tokens = list(lexical(ex_2))
-        self.assertEquals(21, len(tokens))
+        self.assertEqual(21, len(tokens))
         ast = syntax(tokens)
-        self.assertEquals(7, len(ast))
+        self.assertEqual(7, len(ast))
 
     def test_example_4_2(self):
         example_4_2 = '''
@@ -61,7 +61,7 @@ class GuideTest(unittest.TestCase):
                 RTS
         '''
         tokens = list(lexical(example_4_2))
-        self.assertEquals(96, len(tokens))
+        self.assertEqual(96, len(tokens))
 
     def test_example_5_6(self):
         """
@@ -131,28 +131,28 @@ class GuideTest(unittest.TestCase):
                 RTS
         '''
         tokens = list(lexical(example_5_14))
-        self.assertEquals(74, len(tokens))
+        self.assertEqual(74, len(tokens))
 
-        self.assertEquals('T_ENDLINE', tokens[0]['type'])
-        self.assertEquals('T_ENDLINE', tokens[1]['type'])
-        self.assertEquals('T_ENDLINE', tokens[2]['type'])
-        self.assertEquals('T_ENDLINE', tokens[3]['type'])
-        self.assertEquals('T_ENDLINE', tokens[4]['type'])
-        self.assertEquals('T_ENDLINE', tokens[5]['type'])
-        self.assertEquals('T_ENDLINE', tokens[6]['type'])
+        self.assertEqual('T_ENDLINE', tokens[0]['type'])
+        self.assertEqual('T_ENDLINE', tokens[1]['type'])
+        self.assertEqual('T_ENDLINE', tokens[2]['type'])
+        self.assertEqual('T_ENDLINE', tokens[3]['type'])
+        self.assertEqual('T_ENDLINE', tokens[4]['type'])
+        self.assertEqual('T_ENDLINE', tokens[5]['type'])
+        self.assertEqual('T_ENDLINE', tokens[6]['type'])
 
-        self.assertEquals('T_LABEL', tokens[7]['type'])
-        self.assertEquals('T_INSTRUCTION', tokens[8]['type'])
-        self.assertEquals('T_HEX_NUMBER', tokens[9]['type'])
-        self.assertEquals('T_ENDLINE', tokens[10]['type'])
+        self.assertEqual('T_LABEL', tokens[7]['type'])
+        self.assertEqual('T_INSTRUCTION', tokens[8]['type'])
+        self.assertEqual('T_HEX_NUMBER', tokens[9]['type'])
+        self.assertEqual('T_ENDLINE', tokens[10]['type'])
 
-        self.assertEquals('T_INSTRUCTION', tokens[11]['type'])
-        self.assertEquals('T_ADDRESS', tokens[12]['type'])
-        self.assertEquals('T_ENDLINE', tokens[13]['type'])
+        self.assertEqual('T_INSTRUCTION', tokens[11]['type'])
+        self.assertEqual('T_ADDRESS', tokens[12]['type'])
+        self.assertEqual('T_ENDLINE', tokens[13]['type'])
 
-        self.assertEquals('T_INSTRUCTION', tokens[14]['type'])
-        self.assertEquals('T_ENDLINE', tokens[15]['type'])
+        self.assertEqual('T_INSTRUCTION', tokens[14]['type'])
+        self.assertEqual('T_ENDLINE', tokens[15]['type'])
 
-        self.assertEquals('T_INSTRUCTION', tokens[16]['type'])
-        self.assertEquals('T_ADDRESS', tokens[17]['type'])
-        self.assertEquals('T_ENDLINE', tokens[18]['type'])
+        self.assertEqual('T_INSTRUCTION', tokens[16]['type'])
+        self.assertEqual('T_ADDRESS', tokens[17]['type'])
+        self.assertEqual('T_ENDLINE', tokens[18]['type'])

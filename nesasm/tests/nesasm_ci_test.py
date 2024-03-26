@@ -107,7 +107,7 @@ class NESAsmCiSuite(object):
 
         labels_py = {k: '${:02X}'.format(v) for k, v in _items()}
 
-        self.assertEquals(labels_c, labels_py)
+        self.assertEqual(labels_c, labels_py)
 
 
 class MovingspriteTest(NESAsmCiSuite, HexFileTestCase):
