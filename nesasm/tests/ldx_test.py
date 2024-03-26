@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 '''
 LDX, Load Register X
 

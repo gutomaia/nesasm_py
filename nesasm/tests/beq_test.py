@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 '''
 BEQ, Branch on Result Zero Test
 

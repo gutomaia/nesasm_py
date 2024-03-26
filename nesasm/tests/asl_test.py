@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 '''
 ASL, Arithmetic Shift Left
 

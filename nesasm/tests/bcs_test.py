@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 '''
 BCS, Branch on Carry Set Test
 

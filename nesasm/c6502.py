@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 address_mode_def = {}
 address_mode_def['S_IMPLIED'] = dict(size=1, short='sngl')
 address_mode_def['S_IMMEDIATE'] = dict(size=2, short='imm')

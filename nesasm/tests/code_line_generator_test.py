@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from unittest import TestCase, skip
 from lexical import code_line_generator
 from types import GeneratorType

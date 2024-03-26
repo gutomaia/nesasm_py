@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 '''
 BVS, Branch on Overflow Set Test
 

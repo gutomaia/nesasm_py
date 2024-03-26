@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 '''
 BNE, Branch on Result not Zero Test
 

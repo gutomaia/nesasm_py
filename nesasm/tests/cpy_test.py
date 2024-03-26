@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 '''
 CPY, Compare with Y Test
 

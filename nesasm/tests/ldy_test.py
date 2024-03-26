@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 '''
 LDY, Load Register Y
 

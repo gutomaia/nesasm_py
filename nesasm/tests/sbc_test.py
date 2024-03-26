@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 '''
 SBC, Subtract with Carry Test
 

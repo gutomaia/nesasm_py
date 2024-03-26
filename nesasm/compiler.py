@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from re import match, I
 
 from lexical import analyse

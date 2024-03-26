@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 '''
 ADC, Add with Carry Test
 

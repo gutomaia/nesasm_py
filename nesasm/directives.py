@@ -1,6 +1,3 @@
-# -*- coding: utf-8 -*-
-
-
 def d_inesprg(arg, cart):
     cart.set_iNES_prg(arg)
 

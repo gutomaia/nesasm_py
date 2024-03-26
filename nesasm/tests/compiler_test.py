@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import unittest
 from types import GeneratorType
 from nesasm.compiler import (lexical, syntax,

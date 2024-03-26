@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 '''
 Those tests are based on examples from:
 http://nesdev.parodius.com/6502guid.txt

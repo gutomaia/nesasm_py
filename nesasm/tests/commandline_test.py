@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from nesasm import main
 from nesasm.tests import FileTestCase
 from unittest.mock import patch

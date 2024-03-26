@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 '''
 BCC, Branch on Carry Clear Test
 

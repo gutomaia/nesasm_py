@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 '''
 CMP, Compare with Accumulator Test
 '''

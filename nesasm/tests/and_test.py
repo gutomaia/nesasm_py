@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 '''
 AND, Logical AND with Accumulator Test
 

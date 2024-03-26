@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from nesasm.tests import HexTestCase
 from nesasm.compiler import lexical, syntax, semantic, get_labels
 from nesasm.cartridge import Cartridge

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 '''
 LSR, Logical Shift Right Test
 

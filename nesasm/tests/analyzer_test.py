@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from unittest import TestCase, skip
 from types import GeneratorType
 from lexical import analyse, UnknownToken

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 '''
 ORA, OR with Accumulator Test
 

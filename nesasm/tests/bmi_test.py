@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 '''
 BMI, Branch on Result Minus Test
 
