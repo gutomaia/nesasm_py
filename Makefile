@@ -56,7 +56,7 @@ ${NESASM_C_BIN}: ${NESASM_C_MAKE}
 tools: ${NESASM_C_BIN}
 
 ci: build ${REQUIREMENTS_TEST} ${CHECKPOINT_DIR}/.python_develop tools
-	${VIRTUALENV} CI=1 nosetests -v --with-timer --timer-top-n 0 --with-coverage --cover-xml --cover-package=${PYTHON_MODULES} ${PYTHON_MODULES}
+	${VIRTUALENV} CI=1 pytest
 
 pep8: ${REQUIREMENTS_TEST}
 	${VIRTUALENV} pep8 --statistics -qq nesasm | sort -rn || echo ''
