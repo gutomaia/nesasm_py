@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from nesasm import main
 from nesasm.tests import FileTestCase
-from mock import patch
+from unittest.mock import patch
 
 
 class CommandLineTest(FileTestCase):
